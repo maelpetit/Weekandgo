@@ -1,0 +1,46 @@
+
+entity Sport {
+	title String
+}
+
+entity Place{
+	nom String,
+	latitude Double,
+	longitude Double
+}
+
+entity Person {
+	firstName String,
+	lastName String,
+	email String,
+	phoneNumber String,
+	birthDate ZonedDateTime,
+	distanceMax Double
+}
+
+entity WeatherRequirements{
+	temperatureMin Double,
+    temperatureMax Double,
+    windSpeedMin Double,
+    windSpeedMax Double,
+    windAngleMin Double,
+    windAngleMax Double,
+    waveHeightMin Double,
+    waveHeightMax Double
+}
+
+enum PrecipitationType{
+	RAIN, SNOW
+}
+
+relationship ManyToMany {
+	Person{sportList} to Sport{personList},
+    Sport{placeList} to Place{sportList}
+}
+
+relationship ManyToOne {
+	Person{currentPlace} to Place,
+   	Sport{weatherRequired} to WeatherRequirements
+}
+
+service all with serviceImpl

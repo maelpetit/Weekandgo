@@ -1,0 +1,65 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myWeatherRequirementsLabel">Create or edit a Weather Requirements</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!weatherRequirements.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="weatherRequirements.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_temperatureMin">Temperature Min</label>
+            <input type="number" class="form-control" name="temperatureMin" id="field_temperatureMin"
+                [(ngModel)]="weatherRequirements.temperatureMin"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_temperatureMax">Temperature Max</label>
+            <input type="number" class="form-control" name="temperatureMax" id="field_temperatureMax"
+                [(ngModel)]="weatherRequirements.temperatureMax"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_windSpeedMin">Wind Speed Min</label>
+            <input type="number" class="form-control" name="windSpeedMin" id="field_windSpeedMin"
+                [(ngModel)]="weatherRequirements.windSpeedMin"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_windSpeedMax">Wind Speed Max</label>
+            <input type="number" class="form-control" name="windSpeedMax" id="field_windSpeedMax"
+                [(ngModel)]="weatherRequirements.windSpeedMax"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_windAngleMin">Wind Angle Min</label>
+            <input type="number" class="form-control" name="windAngleMin" id="field_windAngleMin"
+                [(ngModel)]="weatherRequirements.windAngleMin"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_windAngleMax">Wind Angle Max</label>
+            <input type="number" class="form-control" name="windAngleMax" id="field_windAngleMax"
+                [(ngModel)]="weatherRequirements.windAngleMax"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_waveHeightMin">Wave Height Min</label>
+            <input type="number" class="form-control" name="waveHeightMin" id="field_waveHeightMin"
+                [(ngModel)]="weatherRequirements.waveHeightMin"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_waveHeightMax">Wave Height Max</label>
+            <input type="number" class="form-control" name="waveHeightMax" id="field_waveHeightMax"
+                [(ngModel)]="weatherRequirements.waveHeightMax"  />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>
