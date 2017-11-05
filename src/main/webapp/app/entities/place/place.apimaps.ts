@@ -13,12 +13,10 @@ import {
     placeRoute,
     placePopupRoute,
 } from './';
-import { ApiMapsComponent } from './place.api-maps.component';
-import {BrowserModule} from "@angular/platform-browser";
-import {CommonModule} from "@angular/common";
-import {FormsModule} from "@angular/forms";
-import {LocationService} from "../../location/location.service";
-import {PlaceService} from "./place.service";
+import { ApiMapsComponent } from './place.apimaps.component';
+import {BrowserModule} from '@angular/platform-browser';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 
 const ENTITY_STATES = [
     ...placeRoute,
@@ -34,8 +32,6 @@ const ENTITY_STATES = [
             apiKey: 'AIzaSyANdkV0x6IJoenkkdr7yx6kyj0Flahh2O4'
         }),
         WeekandgoSharedModule,
-        LocationService,
-        PlaceService,
         RouterModule.forRoot(ENTITY_STATES, { useHash: true })
     ],
     declarations: [
@@ -50,12 +46,10 @@ const ENTITY_STATES = [
     entryComponents: [
         ApiMapsComponent,
     ],
-    providers: [LocationService, PlaceService],
+    providers: [],
     exports: [
         ApiMapsComponent,
     ],
-
-
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class WeekandgoApiMapsModule{}
+export class WeekandgoApiMapsModule {}
