@@ -54,6 +54,22 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="precipitation_type_max" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="precipitation_type_min" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="precipitation_value_max" type="double">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="precipitation_value_min" type="double">
+                <constraints nullable="true" />
+            </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         

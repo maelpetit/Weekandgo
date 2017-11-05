@@ -5,6 +5,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+import fr.istic.domain.enumeration.PrecipitationType;
+
 /**
  * A WeatherRequirements.
  */
@@ -41,6 +43,20 @@ public class WeatherRequirements implements Serializable {
 
     @Column(name = "wave_height_max")
     private Double waveHeightMax;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "precipitation_type_max")
+    private PrecipitationType precipitationTypeMax;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "precipitation_type_min")
+    private PrecipitationType precipitationTypeMin;
+
+    @Column(name = "precipitation_value_max")
+    private Double precipitationValueMax;
+
+    @Column(name = "precipitation_value_min")
+    private Double precipitationValueMin;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -154,6 +170,58 @@ public class WeatherRequirements implements Serializable {
     public void setWaveHeightMax(Double waveHeightMax) {
         this.waveHeightMax = waveHeightMax;
     }
+
+    public PrecipitationType getPrecipitationTypeMax() {
+        return precipitationTypeMax;
+    }
+
+    public WeatherRequirements precipitationTypeMax(PrecipitationType precipitationTypeMax) {
+        this.precipitationTypeMax = precipitationTypeMax;
+        return this;
+    }
+
+    public void setPrecipitationTypeMax(PrecipitationType precipitationTypeMax) {
+        this.precipitationTypeMax = precipitationTypeMax;
+    }
+
+    public PrecipitationType getPrecipitationTypeMin() {
+        return precipitationTypeMin;
+    }
+
+    public WeatherRequirements precipitationTypeMin(PrecipitationType precipitationTypeMin) {
+        this.precipitationTypeMin = precipitationTypeMin;
+        return this;
+    }
+
+    public void setPrecipitationTypeMin(PrecipitationType precipitationTypeMin) {
+        this.precipitationTypeMin = precipitationTypeMin;
+    }
+
+    public Double getPrecipitationValueMax() {
+        return precipitationValueMax;
+    }
+
+    public WeatherRequirements precipitationValueMax(Double precipitationValueMax) {
+        this.precipitationValueMax = precipitationValueMax;
+        return this;
+    }
+
+    public void setPrecipitationValueMax(Double precipitationValueMax) {
+        this.precipitationValueMax = precipitationValueMax;
+    }
+
+    public Double getPrecipitationValueMin() {
+        return precipitationValueMin;
+    }
+
+    public WeatherRequirements precipitationValueMin(Double precipitationValueMin) {
+        this.precipitationValueMin = precipitationValueMin;
+        return this;
+    }
+
+    public void setPrecipitationValueMin(Double precipitationValueMin) {
+        this.precipitationValueMin = precipitationValueMin;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -188,6 +256,10 @@ public class WeatherRequirements implements Serializable {
             ", windAngleMax='" + getWindAngleMax() + "'" +
             ", waveHeightMin='" + getWaveHeightMin() + "'" +
             ", waveHeightMax='" + getWaveHeightMax() + "'" +
+            ", precipitationTypeMax='" + getPrecipitationTypeMax() + "'" +
+            ", precipitationTypeMin='" + getPrecipitationTypeMin() + "'" +
+            ", precipitationValueMax='" + getPrecipitationValueMax() + "'" +
+            ", precipitationValueMin='" + getPrecipitationValueMin() + "'" +
             "}";
     }
 }

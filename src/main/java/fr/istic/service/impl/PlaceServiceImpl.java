@@ -51,6 +51,7 @@ public class PlaceServiceImpl implements PlaceService{
     @Transactional(readOnly = true)
     public List<Place> findAll() {
         log.debug("Request to get all Places");
+//        placeTest.placeCollectionTest();
         return placeRepository.findAll();
     }
 

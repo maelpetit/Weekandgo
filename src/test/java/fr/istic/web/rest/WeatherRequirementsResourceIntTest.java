@@ -29,6 +29,8 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import fr.istic.domain.enumeration.PrecipitationType;
+import fr.istic.domain.enumeration.PrecipitationType;
 /**
  * Test class for the WeatherRequirementsResource REST controller.
  *
@@ -61,6 +63,18 @@ public class WeatherRequirementsResourceIntTest {
 
     private static final Double DEFAULT_WAVE_HEIGHT_MAX = 1D;
     private static final Double UPDATED_WAVE_HEIGHT_MAX = 2D;
+
+    private static final PrecipitationType DEFAULT_PRECIPITATION_TYPE_MAX = PrecipitationType.RAIN;
+    private static final PrecipitationType UPDATED_PRECIPITATION_TYPE_MAX = PrecipitationType.SNOW;
+
+    private static final PrecipitationType DEFAULT_PRECIPITATION_TYPE_MIN = PrecipitationType.RAIN;
+    private static final PrecipitationType UPDATED_PRECIPITATION_TYPE_MIN = PrecipitationType.SNOW;
+
+    private static final Double DEFAULT_PRECIPITATION_VALUE_MAX = 1D;
+    private static final Double UPDATED_PRECIPITATION_VALUE_MAX = 2D;
+
+    private static final Double DEFAULT_PRECIPITATION_VALUE_MIN = 1D;
+    private static final Double UPDATED_PRECIPITATION_VALUE_MIN = 2D;
 
     @Autowired
     private WeatherRequirementsRepository weatherRequirementsRepository;
@@ -109,7 +123,11 @@ public class WeatherRequirementsResourceIntTest {
             .windAngleMin(DEFAULT_WIND_ANGLE_MIN)
             .windAngleMax(DEFAULT_WIND_ANGLE_MAX)
             .waveHeightMin(DEFAULT_WAVE_HEIGHT_MIN)
-            .waveHeightMax(DEFAULT_WAVE_HEIGHT_MAX);
+            .waveHeightMax(DEFAULT_WAVE_HEIGHT_MAX)
+            .precipitationTypeMax(DEFAULT_PRECIPITATION_TYPE_MAX)
+            .precipitationTypeMin(DEFAULT_PRECIPITATION_TYPE_MIN)
+            .precipitationValueMax(DEFAULT_PRECIPITATION_VALUE_MAX)
+            .precipitationValueMin(DEFAULT_PRECIPITATION_VALUE_MIN);
         return weatherRequirements;
     }
 
@@ -141,6 +159,10 @@ public class WeatherRequirementsResourceIntTest {
         assertThat(testWeatherRequirements.getWindAngleMax()).isEqualTo(DEFAULT_WIND_ANGLE_MAX);
         assertThat(testWeatherRequirements.getWaveHeightMin()).isEqualTo(DEFAULT_WAVE_HEIGHT_MIN);
         assertThat(testWeatherRequirements.getWaveHeightMax()).isEqualTo(DEFAULT_WAVE_HEIGHT_MAX);
+        assertThat(testWeatherRequirements.getPrecipitationTypeMax()).isEqualTo(DEFAULT_PRECIPITATION_TYPE_MAX);
+        assertThat(testWeatherRequirements.getPrecipitationTypeMin()).isEqualTo(DEFAULT_PRECIPITATION_TYPE_MIN);
+        assertThat(testWeatherRequirements.getPrecipitationValueMax()).isEqualTo(DEFAULT_PRECIPITATION_VALUE_MAX);
+        assertThat(testWeatherRequirements.getPrecipitationValueMin()).isEqualTo(DEFAULT_PRECIPITATION_VALUE_MIN);
     }
 
     @Test
@@ -180,7 +202,11 @@ public class WeatherRequirementsResourceIntTest {
             .andExpect(jsonPath("$.[*].windAngleMin").value(hasItem(DEFAULT_WIND_ANGLE_MIN.doubleValue())))
             .andExpect(jsonPath("$.[*].windAngleMax").value(hasItem(DEFAULT_WIND_ANGLE_MAX.doubleValue())))
             .andExpect(jsonPath("$.[*].waveHeightMin").value(hasItem(DEFAULT_WAVE_HEIGHT_MIN.doubleValue())))
-            .andExpect(jsonPath("$.[*].waveHeightMax").value(hasItem(DEFAULT_WAVE_HEIGHT_MAX.doubleValue())));
+            .andExpect(jsonPath("$.[*].waveHeightMax").value(hasItem(DEFAULT_WAVE_HEIGHT_MAX.doubleValue())))
+            .andExpect(jsonPath("$.[*].precipitationTypeMax").value(hasItem(DEFAULT_PRECIPITATION_TYPE_MAX.toString())))
+            .andExpect(jsonPath("$.[*].precipitationTypeMin").value(hasItem(DEFAULT_PRECIPITATION_TYPE_MIN.toString())))
+            .andExpect(jsonPath("$.[*].precipitationValueMax").value(hasItem(DEFAULT_PRECIPITATION_VALUE_MAX.doubleValue())))
+            .andExpect(jsonPath("$.[*].precipitationValueMin").value(hasItem(DEFAULT_PRECIPITATION_VALUE_MIN.doubleValue())));
     }
 
     @Test
@@ -201,7 +227,11 @@ public class WeatherRequirementsResourceIntTest {
             .andExpect(jsonPath("$.windAngleMin").value(DEFAULT_WIND_ANGLE_MIN.doubleValue()))
             .andExpect(jsonPath("$.windAngleMax").value(DEFAULT_WIND_ANGLE_MAX.doubleValue()))
             .andExpect(jsonPath("$.waveHeightMin").value(DEFAULT_WAVE_HEIGHT_MIN.doubleValue()))
-            .andExpect(jsonPath("$.waveHeightMax").value(DEFAULT_WAVE_HEIGHT_MAX.doubleValue()));
+            .andExpect(jsonPath("$.waveHeightMax").value(DEFAULT_WAVE_HEIGHT_MAX.doubleValue()))
+            .andExpect(jsonPath("$.precipitationTypeMax").value(DEFAULT_PRECIPITATION_TYPE_MAX.toString()))
+            .andExpect(jsonPath("$.precipitationTypeMin").value(DEFAULT_PRECIPITATION_TYPE_MIN.toString()))
+            .andExpect(jsonPath("$.precipitationValueMax").value(DEFAULT_PRECIPITATION_VALUE_MAX.doubleValue()))
+            .andExpect(jsonPath("$.precipitationValueMin").value(DEFAULT_PRECIPITATION_VALUE_MIN.doubleValue()));
     }
 
     @Test
@@ -230,7 +260,11 @@ public class WeatherRequirementsResourceIntTest {
             .windAngleMin(UPDATED_WIND_ANGLE_MIN)
             .windAngleMax(UPDATED_WIND_ANGLE_MAX)
             .waveHeightMin(UPDATED_WAVE_HEIGHT_MIN)
-            .waveHeightMax(UPDATED_WAVE_HEIGHT_MAX);
+            .waveHeightMax(UPDATED_WAVE_HEIGHT_MAX)
+            .precipitationTypeMax(UPDATED_PRECIPITATION_TYPE_MAX)
+            .precipitationTypeMin(UPDATED_PRECIPITATION_TYPE_MIN)
+            .precipitationValueMax(UPDATED_PRECIPITATION_VALUE_MAX)
+            .precipitationValueMin(UPDATED_PRECIPITATION_VALUE_MIN);
 
         restWeatherRequirementsMockMvc.perform(put("/api/weather-requirements")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -249,6 +283,10 @@ public class WeatherRequirementsResourceIntTest {
         assertThat(testWeatherRequirements.getWindAngleMax()).isEqualTo(UPDATED_WIND_ANGLE_MAX);
         assertThat(testWeatherRequirements.getWaveHeightMin()).isEqualTo(UPDATED_WAVE_HEIGHT_MIN);
         assertThat(testWeatherRequirements.getWaveHeightMax()).isEqualTo(UPDATED_WAVE_HEIGHT_MAX);
+        assertThat(testWeatherRequirements.getPrecipitationTypeMax()).isEqualTo(UPDATED_PRECIPITATION_TYPE_MAX);
+        assertThat(testWeatherRequirements.getPrecipitationTypeMin()).isEqualTo(UPDATED_PRECIPITATION_TYPE_MIN);
+        assertThat(testWeatherRequirements.getPrecipitationValueMax()).isEqualTo(UPDATED_PRECIPITATION_VALUE_MAX);
+        assertThat(testWeatherRequirements.getPrecipitationValueMin()).isEqualTo(UPDATED_PRECIPITATION_VALUE_MIN);
     }
 
     @Test

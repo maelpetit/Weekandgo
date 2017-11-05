@@ -26,7 +26,11 @@ entity WeatherRequirements{
     windAngleMin Double,
     windAngleMax Double,
     waveHeightMin Double,
-    waveHeightMax Double
+    waveHeightMax Double,
+    precipitationTypeMax PrecipitationType,
+    precipitationTypeMin PrecipitationType,
+    precipitationValueMax Double,
+    precipitationValueMin Double
 }
 
 enum PrecipitationType{

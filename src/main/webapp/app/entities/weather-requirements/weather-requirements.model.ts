@@ -1,5 +1,10 @@
 import { BaseEntity } from './../../shared';
 
+export const enum PrecipitationType {
+    'RAIN',
+    'SNOW'
+}
+
 export class WeatherRequirements implements BaseEntity {
     constructor(
         public id?: number,
@@ -11,6 +16,10 @@ export class WeatherRequirements implements BaseEntity {
         public windAngleMax?: number,
         public waveHeightMin?: number,
         public waveHeightMax?: number,
+        public precipitationTypeMax?: PrecipitationType,
+        public precipitationTypeMin?: PrecipitationType,
+        public precipitationValueMax?: number,
+        public precipitationValueMin?: number,
     ) {
     }
 }
