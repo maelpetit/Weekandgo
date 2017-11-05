@@ -48,10 +48,9 @@ public class PlaceServiceImpl implements PlaceService{
      *  @return the list of entities
      */
     @Override
-    //@Transactional(readOnly = true) //TODO ne pas oublier de remettre
+    @Transactional(readOnly = true)
     public List<Place> findAll() {
         log.debug("Request to get all Places");
-        placeTest.placeCollectionTest();
         return placeRepository.findAll();
     }
 
