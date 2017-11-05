@@ -51,7 +51,6 @@ public class SportServiceImpl implements SportService{
     @Transactional(readOnly = true)
     public List<Sport> findAll() {
         log.debug("Request to get all Sports");
-//        sportTest.sportCreationsTest();
         return sportRepository.findAllWithEagerRelationships();
     }
 

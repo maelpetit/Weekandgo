@@ -19,12 +19,15 @@ public class SportTest {
 
     public void sportCreationsTest(){
         System.out.println("Starting sportCreationTest...");
-        Sport foot = SportFactory.getFactory().createFootball();
-        weatherRequirementsService.save(foot.getWeatherRequired());
-        sportService.save(foot);
+        Sport sport1 = SportFactory.getFactory().createSurf();
+        Sport sport2 = SportFactory.getFactory().createKitesurf();
 
-        Sport beachVolley = SportFactory.getFactory().createBeachVolley();
-        weatherRequirementsService.save(beachVolley.getWeatherRequired());
-        sportService.save(beachVolley);
+        save(sport1);
+        save(sport2);
+    }
+
+    private void save(Sport sport){
+        weatherRequirementsService.save(sport.getWeatherRequired());
+        sportService.save(sport);
     }
 }

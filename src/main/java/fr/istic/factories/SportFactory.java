@@ -29,4 +29,18 @@ public class SportFactory {
         beachVolley.setWeatherRequired(WeatherRequirementsFactory.getFactory().createBeachVolleyRequirements());
         return beachVolley;
     }
+
+    public Sport createSurf(){
+        Sport surf = new Sport();
+        surf.setTitle("Surf");
+        surf.setWeatherRequired(WeatherRequirementsFactory.getFactory().createSurfRequirements());
+        return surf;
+    }
+
+    public Sport createKitesurf(){
+        Sport kitesurf = new Sport();
+        kitesurf.setTitle("Kite Surf");
+        kitesurf.setWeatherRequired(WeatherRequirementsFactory.getFactory().createKitesurfRequirements());
+        return kitesurf;
+    }
 }

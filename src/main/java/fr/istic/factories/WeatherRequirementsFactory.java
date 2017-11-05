@@ -18,20 +18,29 @@ public class WeatherRequirementsFactory {
     }
 
     public WeatherRequirements createFootballRequirements(){
-        WeatherRequirements weatherRequirements = new WeatherRequirements();
-        weatherRequirements.setTemperatureMin(5.);
-        weatherRequirements.setTemperatureMax(40.);
-        weatherRequirements.setWindSpeedMax(60.);
-        weatherRequirements.setPrecipitationTypeMax(PrecipitationType.SNOW);
-        return weatherRequirements;
+        return createWeatherRequirements(5., 40., null, PrecipitationType.SNOW, null, 60.);
     }
 
     public WeatherRequirements createBeachVolleyRequirements(){
+        return createWeatherRequirements(15., 40., null, PrecipitationType.RAIN, null, 40.);
+    }
+
+    public WeatherRequirements createSurfRequirements(){
+        return createWeatherRequirements(15., 40., null, PrecipitationType.RAIN, null, null);
+    }
+
+    public WeatherRequirements createKitesurfRequirements(){
+        return createWeatherRequirements(15., 40., null, PrecipitationType.RAIN, 10., null);
+    }
+
+    public WeatherRequirements createWeatherRequirements(Double tempMin, Double tempMax, PrecipitationType precipitationTypeMin, PrecipitationType precipitationTypeMax, Double windSpeedMin, Double windSpeedMax){
         WeatherRequirements weatherRequirements = new WeatherRequirements();
-        weatherRequirements.setTemperatureMin(15.);
-        weatherRequirements.setTemperatureMax(40.);
-        weatherRequirements.setPrecipitationTypeMax(PrecipitationType.RAIN);
-        weatherRequirements.setWindSpeedMax(40.);
+        weatherRequirements.setTemperatureMin(tempMin);
+        weatherRequirements.setTemperatureMax(tempMax);
+        weatherRequirements.setPrecipitationTypeMin(precipitationTypeMin);
+        weatherRequirements.setPrecipitationTypeMax(precipitationTypeMax);
+        weatherRequirements.setWindSpeedMin(windSpeedMin);
+        weatherRequirements.setWindSpeedMax(windSpeedMax);
         return weatherRequirements;
     }
 }
