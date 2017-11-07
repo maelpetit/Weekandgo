@@ -45,7 +45,7 @@ public class WeatherFactory {
             case "Snow":
                 weather.setPrecipitation(PrecipitationFactory.getFactory().createSnow());
         }
-        System.out.println(weather.toString());
+//        System.out.println(weather.toString());
 //        System.out.println(weather.getPrecipitation().toString());
         return weather;
     }
