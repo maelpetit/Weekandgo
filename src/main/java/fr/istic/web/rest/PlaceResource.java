@@ -3,6 +3,7 @@ package fr.istic.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import fr.istic.domain.Place;
 import fr.istic.service.PlaceService;
+import fr.istic.web.rest.errors.BadRequestAlertException;
 import fr.istic.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -45,7 +46,7 @@ public class PlaceResource {
     public ResponseEntity<Place> createPlace(@RequestBody Place place) throws URISyntaxException {
         log.debug("REST request to save Place : {}", place);
         if (place.getId() != null) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new place cannot already have an ID")).body(null);
+            throw new BadRequestAlertException("A new place cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Place result = placeService.save(place);
         return ResponseEntity.created(new URI("/api/places/" + result.getId()))

@@ -3,6 +3,7 @@ package fr.istic.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import fr.istic.domain.Person;
 import fr.istic.service.PersonService;
+import fr.istic.web.rest.errors.BadRequestAlertException;
 import fr.istic.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -45,7 +46,7 @@ public class PersonResource {
     public ResponseEntity<Person> createPerson(@RequestBody Person person) throws URISyntaxException {
         log.debug("REST request to save Person : {}", person);
         if (person.getId() != null) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new person cannot already have an ID")).body(null);
+            throw new BadRequestAlertException("A new person cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Person result = personService.save(person);
         return ResponseEntity.created(new URI("/api/people/" + result.getId()))
