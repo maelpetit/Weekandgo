@@ -1,0 +1,37 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "weatherRequired",
+            "otherEntityName": "weatherRequirements",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "sportList",
+            "relationshipName": "placeList",
+            "otherEntityName": "place",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "personList",
+            "otherEntityName": "person",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "sportList"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "title",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20171104165212",
+    "entityTableName": "sport",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl"
+}
