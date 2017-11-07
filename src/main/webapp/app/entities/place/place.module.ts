@@ -1,5 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { AgmCoreModule } from '@agm/core';
 
 import { WeekandgoSharedModule } from '../../shared';
 import {
@@ -23,6 +24,9 @@ const ENTITY_STATES = [
 @NgModule({
     imports: [
         WeekandgoSharedModule,
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyCJgTsyc6pW3-Fdbteh3clxi9nqu94MA9s'
+        }),
         RouterModule.forRoot(ENTITY_STATES, { useHash: true })
     ],
     declarations: [

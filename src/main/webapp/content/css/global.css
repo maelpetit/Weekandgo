@@ -21,12 +21,6 @@ a:hover {
 }
 
 /* ==========================================================================
-Api Maps
-========================================================================== */
-agm-map {
-  height: 300px;
-}
-/* ==========================================================================
 Browser Upgrade Prompt
 ========================================================================== */
 .browserupgrade {
@@ -206,5 +200,12 @@ ui bootstrap tweaks
 .uib-datepicker-popup  > li > div.uib-datepicker > table:focus {
     outline: none;
 }
+
+.thread-dump-modal-lock {
+    max-width: 450px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+ }
 
 /* jhipster-needle-css-add-main JHipster will add new css style */

@@ -1,12 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
-import { JhiEventManager, JhiParseLinks, JhiPaginationUtil, JhiAlertService } from 'ng-jhipster';
+import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
 import { Place } from './place.model';
 import { PlaceService } from './place.service';
 import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
-import { PaginationConfig } from '../../blocks/config/uib-pagination.config';
 
 @Component({
     selector: 'jhi-place',
@@ -16,6 +15,9 @@ export class PlaceComponent implements OnInit, OnDestroy {
 places: Place[];
     currentAccount: any;
     eventSubscriber: Subscription;
+    title: string;
+    lat: number;
+    lng: number;
 
     constructor(
         private placeService: PlaceService,
@@ -23,6 +25,9 @@ places: Place[];
         private eventManager: JhiEventManager,
         private principal: Principal
     ) {
+        this.title = 'My first AGM project';
+        this.lat = 51.678418;
+        this.lng = 7.809007;
     }
 
     loadAll() {

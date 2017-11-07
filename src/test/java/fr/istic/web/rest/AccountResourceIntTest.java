@@ -1,6 +1,6 @@
 package fr.istic.web.rest;
-import fr.istic.config.Constants;
 
+import fr.istic.config.Constants;
 import fr.istic.WeekandgoApp;
 import fr.istic.domain.Authority;
 import fr.istic.domain.PersistentToken;
@@ -10,11 +10,13 @@ import fr.istic.repository.PersistentTokenRepository;
 import fr.istic.repository.UserRepository;
 import fr.istic.security.AuthoritiesConstants;
 import fr.istic.service.MailService;
-import fr.istic.service.UserService;
 import fr.istic.service.dto.UserDTO;
+import fr.istic.web.rest.errors.ExceptionTranslator;
 import fr.istic.web.rest.vm.KeyAndPasswordVM;
 import fr.istic.web.rest.vm.ManagedUserVM;
+import fr.istic.service.UserService;
 import org.apache.commons.lang3.RandomStringUtils;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,9 +32,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.time.Instant;
 import java.time.LocalDate;
+
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -40,9 +42,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
@@ -72,31 +72,35 @@ public class AccountResourceIntTest {
     @Autowired
     private HttpMessageConverter[] httpMessageConverters;
 
+    @Autowired
+    private ExceptionTranslator exceptionTranslator;
+
     @Mock
     private UserService mockUserService;
 
     @Mock
     private MailService mockMailService;
 
-    private MockMvc restUserMockMvc;
-
     private MockMvc restMvc;
+
+    private MockMvc restUserMockMvc;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         doNothing().when(mockMailService).sendActivationEmail(anyObject());
-
         AccountResource accountResource =
             new AccountResource(userRepository, userService, mockMailService, persistentTokenRepository);
 
         AccountResource accountUserMockResource =
             new AccountResource(userRepository, mockUserService, mockMailService, persistentTokenRepository);
-
         this.restMvc = MockMvcBuilders.standaloneSetup(accountResource)
             .setMessageConverters(httpMessageConverters)
+            .setControllerAdvice(exceptionTranslator)
             .build();
-        this.restUserMockMvc = MockMvcBuilders.standaloneSetup(accountUserMockResource).build();
+        this.restUserMockMvc = MockMvcBuilders.standaloneSetup(accountUserMockResource)
+            .setControllerAdvice(exceptionTranslator)
+            .build();
     }
 
     @Test
