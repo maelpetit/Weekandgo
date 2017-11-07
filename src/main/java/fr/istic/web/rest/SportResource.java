@@ -3,6 +3,7 @@ package fr.istic.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import fr.istic.domain.Sport;
 import fr.istic.service.SportService;
+import fr.istic.web.rest.errors.BadRequestAlertException;
 import fr.istic.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -45,7 +46,7 @@ public class SportResource {
     public ResponseEntity<Sport> createSport(@RequestBody Sport sport) throws URISyntaxException {
         log.debug("REST request to save Sport : {}", sport);
         if (sport.getId() != null) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new sport cannot already have an ID")).body(null);
+            throw new BadRequestAlertException("A new sport cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Sport result = sportService.save(sport);
         return ResponseEntity.created(new URI("/api/sports/" + result.getId()))
