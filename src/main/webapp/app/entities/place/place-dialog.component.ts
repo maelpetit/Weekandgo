@@ -7,7 +7,6 @@ import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
 import { Place } from './place.model';
-import { WeekandgoApiMapsModule} from './place.apimaps' ;
 import { PlacePopupService } from './place-popup.service';
 import { PlaceService } from './place.service';
 import { Sport, SportService } from '../sport';
