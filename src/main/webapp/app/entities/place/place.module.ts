@@ -14,6 +14,10 @@ import {
     placeRoute,
     placePopupRoute,
 } from './';
+import {BrowserModule} from '@angular/platform-browser';
+import {AgmCoreModule} from '@agm/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 
 const ENTITY_STATES = [
     ...placeRoute,
@@ -22,6 +26,12 @@ const ENTITY_STATES = [
 
 @NgModule({
     imports: [
+        BrowserModule,
+        CommonModule,
+        FormsModule,
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyDNmDC8sk5oIyIh0aF7uZsnWeuEYeibMWE'
+        }),
         WeekandgoSharedModule,
         RouterModule.forRoot(ENTITY_STATES, { useHash: true })
     ],
