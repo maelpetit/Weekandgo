@@ -3,7 +3,9 @@ package fr.istic.service.impl;
 import fr.istic.service.WeatherRequirementsService;
 import fr.istic.domain.WeatherRequirements;
 import fr.istic.repository.WeatherRequirementsRepository;
+import fr.istic.tests.PersonTest;
 import fr.istic.tests.PlaceTest;
+import fr.istic.tests.SportTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,12 @@ public class WeatherRequirementsServiceImpl implements WeatherRequirementsServic
 
     @Autowired
     private PlaceTest placeTest;
+
+    @Autowired
+    private PersonTest personTest;
+
+    @Autowired
+    private SportTest sportTest;
 
     public WeatherRequirementsServiceImpl(WeatherRequirementsRepository weatherRequirementsRepository) {
         this.weatherRequirementsRepository = weatherRequirementsRepository;
@@ -51,7 +59,6 @@ public class WeatherRequirementsServiceImpl implements WeatherRequirementsServic
     @Transactional(readOnly = true)
     public List<WeatherRequirements> findAll() {
         log.debug("Request to get all WeatherRequirements");
-        placeTest.placesInSportsTest();
         return weatherRequirementsRepository.findAll();
     }
 

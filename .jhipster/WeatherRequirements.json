@@ -57,5 +57,6 @@
     "entityTableName": "weather_requirements",
     "dto": "no",
     "pagination": "no",
-    "service": "serviceImpl"
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false
 }

@@ -3,10 +3,8 @@ package fr.istic.service.impl;
 import fr.istic.service.SportService;
 import fr.istic.domain.Sport;
 import fr.istic.repository.SportRepository;
-import fr.istic.tests.SportTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,9 +20,6 @@ public class SportServiceImpl implements SportService{
     private final Logger log = LoggerFactory.getLogger(SportServiceImpl.class);
 
     private final SportRepository sportRepository;
-
-    @Autowired
-    private SportTest sportTest;
 
     public SportServiceImpl(SportRepository sportRepository) {
         this.sportRepository = sportRepository;
@@ -48,7 +43,7 @@ public class SportServiceImpl implements SportService{
      *  @return the list of entities
      */
     @Override
-    //@Transactional(readOnly = true)
+    @Transactional(readOnly = true)
     public List<Sport> findAll() {
         log.debug("Request to get all Sports");
         return sportRepository.findAllWithEagerRelationships();

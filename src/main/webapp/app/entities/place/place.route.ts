@@ -28,6 +28,7 @@ export const placeRoute: Routes = [
         canActivate: [UserRouteAccessService]
     }
 ];
+
 export const placePopupRoute: Routes = [
     {
         path: 'place-new',

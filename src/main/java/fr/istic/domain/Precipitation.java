@@ -1,9 +1,9 @@
 package fr.istic.domain;
 
+import fr.istic.domain.enumeration.PrecipitationType;
+
 import java.io.Serializable;
 import java.util.Objects;
-
-import fr.istic.domain.enumeration.PrecipitationType;
 
 /**
  * A Precipitation.

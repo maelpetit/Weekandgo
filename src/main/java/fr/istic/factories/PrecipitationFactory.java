@@ -1,6 +1,5 @@
 package fr.istic.factories;
 
-import com.google.gson.JsonObject;
 import fr.istic.domain.Precipitation;
 import fr.istic.domain.enumeration.PrecipitationType;
 

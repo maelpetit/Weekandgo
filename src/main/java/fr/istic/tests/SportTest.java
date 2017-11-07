@@ -21,9 +21,13 @@ public class SportTest {
         System.out.println("Starting sportCreationTest...");
         Sport sport1 = SportFactory.getFactory().createSurf();
         Sport sport2 = SportFactory.getFactory().createKitesurf();
+        Sport sport3 = SportFactory.getFactory().createFootball();
+        Sport sport4 = SportFactory.getFactory().createBeachVolley();
 
         save(sport1);
         save(sport2);
+        save(sport3);
+        save(sport4);
     }
 
     private void save(Sport sport){

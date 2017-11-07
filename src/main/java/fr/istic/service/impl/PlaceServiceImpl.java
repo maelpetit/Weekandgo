@@ -3,10 +3,8 @@ package fr.istic.service.impl;
 import fr.istic.service.PlaceService;
 import fr.istic.domain.Place;
 import fr.istic.repository.PlaceRepository;
-import fr.istic.tests.PlaceTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,9 +20,6 @@ public class PlaceServiceImpl implements PlaceService{
     private final Logger log = LoggerFactory.getLogger(PlaceServiceImpl.class);
 
     private final PlaceRepository placeRepository;
-
-    @Autowired
-    private PlaceTest placeTest;
 
     public PlaceServiceImpl(PlaceRepository placeRepository) {
         this.placeRepository = placeRepository;

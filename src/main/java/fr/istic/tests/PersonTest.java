@@ -33,8 +33,8 @@ public class PersonTest {
         ZonedDateTime date2 = ZonedDateTime.of(1992, 1, 8, 0, 0, 0, 0, ZoneId.systemDefault());
         String[] sports1 = {"Surf", "Beach Volley"};
         String[] sports2 = {"Football", "Kite Surf"};
-        Person mael = factory.create("Maël", "Petit", "mael.petit@wanadoo.fr", "12", date1, "Rennes", sports1);
-        Person jules = factory.create("Jules", "Paget", "jules.v.paget@gmail.com", "13", date2, "Lorient", sports2);
+        Person mael = factory.create("Maël", "Petit", "mael.petit@wanadoo.fr", "12", date1, "Rennes", sports1, 300D);
+        Person jules = factory.create("Jules", "Paget", "jules.v.paget@gmail.com", "13", date2, "Lorient", sports2, 400D);
 
         System.out.println(mael);
         System.out.println(jules);

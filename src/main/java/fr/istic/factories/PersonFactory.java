@@ -42,13 +42,14 @@ public class PersonFactory {
         }
     }
 
-    public Person create(String firstName, String lastName, String email, String phoneNumber, ZonedDateTime birthDate, String currentPlaceName, String[] sportTitles){
+    public Person create(String firstName, String lastName, String email, String phoneNumber, ZonedDateTime birthDate, String currentPlaceName, String[] sportTitles, Double distance){
         Person person = new Person();
         person.setFirstName(firstName);
         person.setLastName(lastName);
         person.setEmail(email);
         person.setPhoneNumber(phoneNumber);
         person.setBirthDate(birthDate);
+        person.setDistanceMax(distance);
 
         if(places.containsKey(currentPlaceName)){
             person.setCurrentPlace(places.get(currentPlaceName));

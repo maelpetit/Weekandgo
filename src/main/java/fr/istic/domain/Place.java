@@ -30,12 +30,12 @@ public class Place implements Serializable {
     @Column(name = "longitude")
     private Double longitude;
 
-    @Transient
-    private Set<Weather> weatherSet;
-
     @ManyToMany(mappedBy = "placeLists")
     @JsonIgnore
     private Set<Sport> sportLists = new HashSet<>();
+
+    @Transient
+    private Set<Weather> weatherSet;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -85,14 +85,6 @@ public class Place implements Serializable {
         this.longitude = longitude;
     }
 
-    public Set<Weather> getWeatherSet() {
-        return weatherSet;
-    }
-
-    public void setWeatherSet(Set<Weather> weatherSet) {
-        this.weatherSet = weatherSet;
-    }
-
     public Set<Sport> getSportLists() {
         return sportLists;
     }
@@ -118,6 +110,14 @@ public class Place implements Serializable {
         this.sportLists = sports;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
+    public Set<Weather> getWeatherSet() {
+        return weatherSet;
+    }
+
+    public void setWeatherSet(Set<Weather> weatherSet) {
+        this.weatherSet = weatherSet;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -148,6 +148,5 @@ public class Place implements Serializable {
             ", longitude='" + getLongitude() + "'" +
             "}";
     }
-
 
 }

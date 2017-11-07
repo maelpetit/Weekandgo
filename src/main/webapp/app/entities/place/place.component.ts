@@ -15,9 +15,6 @@ export class PlaceComponent implements OnInit, OnDestroy {
 places: Place[];
     currentAccount: any;
     eventSubscriber: Subscription;
-    title: string;
-    lat: number;
-    lng: number;
 
     constructor(
         private placeService: PlaceService,
@@ -25,9 +22,6 @@ places: Place[];
         private eventManager: JhiEventManager,
         private principal: Principal
     ) {
-        this.title = 'My first AGM project';
-        this.lat = 51.678418;
-        this.lng = 7.809007;
     }
 
     loadAll() {
