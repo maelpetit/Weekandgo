@@ -2,7 +2,6 @@ package fr.istic.factories;
 
 import com.google.gson.*;
 import fr.istic.domain.Weather;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;

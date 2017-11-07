@@ -19,19 +19,10 @@ public class EventTest {
     private PersonService personService;
 
     public void eventTest() {
-        FileWriter fw = null;
         Event event1 = WeekEndCalculator.getEventForPerson(personService.findOne(1L));
         System.out.println(event1);
         Event event2 = WeekEndCalculator.getEventForPerson(personService.findOne(2L));
         System.out.println(event2);
-        try {
-            fw = new FileWriter(new File("event.test"));
-            fw.write(event1 + "\n" + event2);
-            fw.flush();
-            fw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
 
     }

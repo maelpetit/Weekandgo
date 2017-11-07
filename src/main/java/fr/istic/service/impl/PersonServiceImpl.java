@@ -53,7 +53,7 @@ public class PersonServiceImpl implements PersonService{
     @Transactional(readOnly = true)
     public List<Person> findAll() {
         log.debug("Request to get all People");
-        eventTest.eventTest();
+//        eventTest.eventTest();
         return personRepository.findAllWithEagerRelationships();
     }
 

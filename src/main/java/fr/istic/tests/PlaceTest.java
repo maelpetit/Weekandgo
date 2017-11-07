@@ -3,6 +3,7 @@ package fr.istic.tests;
 import fr.istic.collectors.PlacesCollector;
 import fr.istic.domain.Place;
 import fr.istic.domain.Sport;
+import fr.istic.log.FileLog;
 import fr.istic.service.PlaceService;
 import fr.istic.service.SportService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,12 +33,6 @@ public class PlaceTest {
 
     public void placesInSportsTest(){
 
-        Set<String> footPlaceNames = new HashSet<>();
-        footPlaceNames.add("Rennes");
-        footPlaceNames.add("Lorient");
-        footPlaceNames.add("Guingamp");
-        footPlaceNames.add("Brest");
-        Set<Place> footPlaces = new HashSet<>();
         Set<String> surfPlaceNames = new HashSet<>();
         surfPlaceNames.add("Erdeven");
         surfPlaceNames.add("Saint-Malo");
@@ -46,24 +41,21 @@ public class PlaceTest {
         surfPlaceNames.add("Brest");
         Set<Place> surfPlaces = new HashSet<>();
         for(Place place : placeservice.findAll()){
-            if(footPlaceNames.contains(place.getNom())){
-                footPlaces.add(place);
-            }else if(surfPlaceNames.contains(place.getNom())){
+            if(surfPlaceNames.contains(place.getNom())){
                 surfPlaces.add(place);
             }
         }
+
+        FileLog.getInstance().log(surfPlaces.size() + "");
         for(Sport sport : sportService.findAll()){
-            if(sport.getTitle().equals("Football")){
-                for(Place footPlace : footPlaces){
-                    sport.addPlaceList(footPlace);
-                }
-            }else if(sport.getTitle().equals("Surf")){
+            if(sport.getTitle().equals("Surf")){
                 for(Place surfPlace : surfPlaces){
                     sport.addPlaceList(surfPlace);
                 }
             }
 
-            sportService.save(sport);
+            //sportService.save(sport);
         }
+        FileLog.getInstance().writeLog("placesInSportsTest.txt");
     }
 }
