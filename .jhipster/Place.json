@@ -1,0 +1,31 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "sportList",
+            "otherEntityName": "sport",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "placeList"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "nom",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "latitude",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "longitude",
+            "fieldType": "Double"
+        }
+    ],
+    "changelogDate": "20171104165213",
+    "entityTableName": "place",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl"
+}

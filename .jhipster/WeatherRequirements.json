@@ -1,0 +1,61 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "temperatureMin",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "temperatureMax",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "windSpeedMin",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "windSpeedMax",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "windAngleMin",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "windAngleMax",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "waveHeightMin",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "waveHeightMax",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "precipitationTypeMax",
+            "fieldType": "PrecipitationType",
+            "fieldValues": "RAIN,SNOW"
+        },
+        {
+            "fieldName": "precipitationTypeMin",
+            "fieldType": "PrecipitationType",
+            "fieldValues": "RAIN,SNOW"
+        },
+        {
+            "fieldName": "precipitationValueMax",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "precipitationValueMin",
+            "fieldType": "Double"
+        }
+    ],
+    "changelogDate": "20171104165215",
+    "entityTableName": "weather_requirements",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl"
+}
