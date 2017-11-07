@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import fr.istic.domain.Person;
 import fr.istic.service.PersonService;
 import fr.istic.tests.PersonTest;
+import fr.istic.web.rest.errors.BadRequestAlertException;
 import fr.istic.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
