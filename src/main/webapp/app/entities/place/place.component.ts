@@ -13,9 +13,7 @@ import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
 })
 export class PlaceComponent implements OnInit, OnDestroy {
 
-    title: string = 'My first AGM project';
-    lat: number = 46.678418;
-    lng: number = -1.809007;
+    title: 'My first AGM project';
     places: Place[];
     currentAccount: any;
     eventSubscriber: Subscription;
