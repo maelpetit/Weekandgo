@@ -45,6 +45,14 @@ export class PlaceComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         this.eventManager.destroy(this.eventSubscriber);
     }
+/*    vm.search = search;
+
+    public function search() {
+        // Call your cool REST service and attach data to it
+        vm.data = MyCoolService.myGetFunctionWhatever();
+        // You can use vm.query ng-model to limit search after 2 input values for example
+        //     if(vm.query.length > 2) do your magic
+    };*/// TODO implementer correctement la fonction pour la barre de recherche
 
     trackId(index: number, item: Place) {
         return item.id;
