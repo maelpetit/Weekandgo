@@ -27,7 +27,7 @@ public class Sport implements Serializable {
     @ManyToOne
     private WeatherRequirements weatherRequired;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "sport_place_list",
                joinColumns = @JoinColumn(name="sports_id", referencedColumnName="id"),
                inverseJoinColumns = @JoinColumn(name="place_lists_id", referencedColumnName="id"))

@@ -3,6 +3,7 @@ package fr.istic.service.impl;
 import fr.istic.service.WeatherRequirementsService;
 import fr.istic.domain.WeatherRequirements;
 import fr.istic.repository.WeatherRequirementsRepository;
+import fr.istic.tests.EventTest;
 import fr.istic.tests.PersonTest;
 import fr.istic.tests.PlaceTest;
 import fr.istic.tests.SportTest;
@@ -34,6 +35,9 @@ public class WeatherRequirementsServiceImpl implements WeatherRequirementsServic
     @Autowired
     private SportTest sportTest;
 
+    @Autowired
+    private EventTest eventTest;
+
     public WeatherRequirementsServiceImpl(WeatherRequirementsRepository weatherRequirementsRepository) {
         this.weatherRequirementsRepository = weatherRequirementsRepository;
     }
@@ -56,9 +60,10 @@ public class WeatherRequirementsServiceImpl implements WeatherRequirementsServic
      *  @return the list of entities
      */
     @Override
-    @Transactional(readOnly = true)
+    //@Transactional(readOnly = true)
     public List<WeatherRequirements> findAll() {
         log.debug("Request to get all WeatherRequirements");
+        eventTest.eventTest();
         return weatherRequirementsRepository.findAll();
     }
 

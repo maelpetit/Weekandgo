@@ -14,6 +14,7 @@ import {
     personRoute,
     personPopupRoute,
 } from './';
+import {EventService} from '../event/event.service';
 
 const ENTITY_STATES = [
     ...personRoute,
@@ -42,6 +43,7 @@ const ENTITY_STATES = [
     ],
     providers: [
         PersonService,
+        EventService,
         PersonPopupService,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

@@ -5,6 +5,8 @@ import { JhiEventManager } from 'ng-jhipster';
 
 import { Person } from './person.model';
 import { PersonService } from './person.service';
+import { EventService } from '../event/event.service';
+import { Event } from '../event/event.model';
 
 @Component({
     selector: 'jhi-person-detail',
@@ -13,13 +15,16 @@ import { PersonService } from './person.service';
 export class PersonDetailComponent implements OnInit, OnDestroy {
 
     person: Person;
+    event: Event;
+
     private subscription: Subscription;
     private eventSubscriber: Subscription;
 
     constructor(
         private eventManager: JhiEventManager,
         private personService: PersonService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private eventService: EventService
     ) {
     }
 
@@ -33,6 +38,10 @@ export class PersonDetailComponent implements OnInit, OnDestroy {
     load(id) {
         this.personService.find(id).subscribe((person) => {
             this.person = person;
+        });
+        this.eventService.find(id).subscribe((event) => {
+            this.event = event;
+            console.log(this.event);
         });
     }
     previousState() {

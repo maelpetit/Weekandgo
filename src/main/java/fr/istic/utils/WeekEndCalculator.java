@@ -2,10 +2,8 @@ package fr.istic.utils;
 
 import fr.istic.collectors.WeatherCollector;
 import fr.istic.domain.*;
-import fr.istic.service.PlaceService;
-import fr.istic.service.SportService;
+import fr.istic.log.FileLog;
 import javafx.util.Pair;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -15,6 +13,9 @@ import java.util.Set;
 public class WeekEndCalculator {
 
     public static Event getEventForPerson(Person person){
+        if(person == null){
+            return null;
+        }
         Set<Event> events = new HashSet<>();
         Map<Pair<Place, Sport>, Double> map = new HashMap<>();
         for(Sport sport : person.getSportLists()){
@@ -22,9 +23,12 @@ public class WeekEndCalculator {
                 Double distance = Maths.distance(person.getCurrentPlace(), place);
                 if(distance <= person.getDistanceMax()){
                     map.put(new Pair(place, sport), distance);
+                    FileLog.log(place.getNom() + " " + sport.getTitle() + " " + distance);
                 }
             }
         }
+
+        FileLog.log("Places close enough : " + map.size());
 
         for (Map.Entry<Pair<Place, Sport>, Double> entry : map.entrySet()) {
             Place place = entry.getKey().getKey();
@@ -42,6 +46,8 @@ public class WeekEndCalculator {
                     event.setSport(sport);
                     event.setWeather(weather);
                     events.add(event);
+                    FileLog.log("Event added");
+                    break;
                 }
             }
         }

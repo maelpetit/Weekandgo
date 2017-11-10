@@ -33,7 +33,7 @@ public class PlaceTest {
 
     public void placesInSportsTest(){
 
-        Set<String> footPlaceNames = new HashSet<>();
+        /*Set<String> footPlaceNames = new HashSet<>();
         footPlaceNames.add("Rennes");
         footPlaceNames.add("Lorient");
         footPlaceNames.add("Guingamp");
@@ -47,22 +47,34 @@ public class PlaceTest {
         surfPlaceNames.add("Brest");
         Set<Place> surfPlaces = new HashSet<>();
         Set<String> volleyPlaceNames = new HashSet<>();
-        footPlaceNames.add("Vannes");
-        footPlaceNames.add("Saint-Brieuc");
-        footPlaceNames.add("Morlaix");
-        footPlaceNames.add("Quimper");
-        Set<Place> volleyPlaces = new HashSet<>();
+        volleyPlaceNames.add("Vannes");
+        volleyPlaceNames.add("Saint-Brieuc");
+        volleyPlaceNames.add("Morlaix");
+        volleyPlaceNames.add("Quimper");
+        Set<Place> volleyPlaces = new HashSet<>();*/
+        Set<String> kitesurfPlaceNames = new HashSet<>();
+        kitesurfPlaceNames.add("Erdeven");
+        kitesurfPlaceNames.add("Saint-Malo");
+        kitesurfPlaceNames.add("Perros-Guirec");
+        kitesurfPlaceNames.add("Saint-Lunaire");
+        kitesurfPlaceNames.add("Brest");
+        Set<Place> kitesurfPlaces = new HashSet<>();
         for(Place place : placeservice.findAll()){
-            if(footPlaceNames.contains(place.getNom())){
+            /*if(footPlaceNames.contains(place.getNom())){
                 footPlaces.add(place);
             }else if(surfPlaceNames.contains(place.getNom())){
                 surfPlaces.add(place);
             }else if(volleyPlaceNames.contains(place.getNom())){
                 volleyPlaces.add(place);
+            }else */if(kitesurfPlaceNames.contains(place.getNom())){
+                kitesurfPlaces.add(place);
             }
         }
+
+        FileLog.log(/*"foot:" + footPlaces.size() + " beach volley:" + volleyPlaces.size()
+        + " surf:" + surfPlaces.size() + */" kite:" + kitesurfPlaces.size());
         for(Sport sport : sportService.findAll()){
-            if(sport.getTitle().equals("Football")){
+            /*if(sport.getTitle().equals("Football")){
                 for(Place footPlace : footPlaces){
                     sport.addPlaceList(footPlace);
                 }
@@ -74,10 +86,14 @@ public class PlaceTest {
                 for(Place volleyPlace : volleyPlaces){
                     sport.addPlaceList(volleyPlace);
                 }
+            }else*/ if(sport.getTitle().equals("Kite Surf")){
+                for(Place kitesurfPlace : kitesurfPlaces){
+                    sport.addPlaceList(kitesurfPlace);
+                }
             }
 
             sportService.save(sport);
         }
-        FileLog.getInstance().writeLog("placesInSportsTest.txt");
+        FileLog.writeLog("placesInSportsTest.txt");
     }
 }

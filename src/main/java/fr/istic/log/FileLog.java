@@ -19,20 +19,31 @@ public class FileLog {
 
     private String content = "";
 
-    public void log(String message){
-        content += message + "\n\n";
+    public static void log(String message){
+        getInstance().content += message + "\n";
     }
 
-    public void writeLog(String fileName){
-        FileWriter fw = null;
+    public static void log(Object object){
+        if(object != null){
+            log("null");
+        }else{
+            log(object.toString());
+        }
+    }
+
+    public static void writeLog(String fileName){
+        FileLog instance = getInstance();
         try {
-            fw = new FileWriter(new File("logs/" + LocalDateTime.now().toString() + "-" + fileName));
-            fw.write(content);
+            File file = new File("logs/" + fileName + "-" + LocalDateTime.now().toString() + ".log");
+            file.createNewFile();
+            FileWriter fw = new FileWriter(file);
+            fw.write(instance.content);
             fw.flush();
             fw.close();
+            instance.content = "";
         } catch (IOException e) {
             e.printStackTrace();
         }
-        content = "";
+
     }
 }
