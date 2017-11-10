@@ -39,6 +39,13 @@ public class Person implements Serializable {
     @Column(name = "distance_max")
     private Double distanceMax;
 
+    @Column(name = "profile_completed")
+    private Boolean profileCompleted;
+
+    @OneToOne
+    @JoinColumn(unique = true)
+    private User user;
+
     @ManyToOne
     private Place currentPlace;
 
@@ -135,6 +142,32 @@ public class Person implements Serializable {
         this.distanceMax = distanceMax;
     }
 
+    public Boolean isProfileCompleted() {
+        return profileCompleted;
+    }
+
+    public Person profileCompleted(Boolean profileCompleted) {
+        this.profileCompleted = profileCompleted;
+        return this;
+    }
+
+    public void setProfileCompleted(Boolean profileCompleted) {
+        this.profileCompleted = profileCompleted;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Person user(User user) {
+        this.user = user;
+        return this;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public Place getCurrentPlace() {
         return currentPlace;
     }
@@ -204,6 +237,7 @@ public class Person implements Serializable {
             ", phoneNumber='" + getPhoneNumber() + "'" +
             ", birthDate='" + getBirthDate() + "'" +
             ", distanceMax='" + getDistanceMax() + "'" +
+            ", profileCompleted='" + isProfileCompleted() + "'" +
             "}";
     }
 }

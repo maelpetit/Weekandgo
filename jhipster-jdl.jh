@@ -15,7 +15,8 @@ entity Person {
 	email String,
 	phoneNumber String,
 	birthDate ZonedDateTime,
-	distanceMax Double
+	distanceMax Double,
+	profileCompleted Boolean
 }
 
 entity WeatherRequirements{
@@ -45,6 +46,10 @@ relationship ManyToMany {
 relationship ManyToOne {
 	Person{currentPlace} to Place,
    	Sport{weatherRequired} to WeatherRequirements
+}
+
+relationship OneToOne {
+	Person{user} to User
 }
 
 service all with serviceImpl

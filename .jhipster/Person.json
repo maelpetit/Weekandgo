@@ -2,6 +2,14 @@
     "fluentMethods": true,
     "relationships": [
         {
+            "relationshipType": "one-to-one",
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "person"
+        },
+        {
             "relationshipType": "many-to-one",
             "relationshipName": "currentPlace",
             "otherEntityName": "place",
@@ -40,6 +48,10 @@
         {
             "fieldName": "distanceMax",
             "fieldType": "Double"
+        },
+        {
+            "fieldName": "profileCompleted",
+            "fieldType": "Boolean"
         }
     ],
     "changelogDate": "20171104165214",

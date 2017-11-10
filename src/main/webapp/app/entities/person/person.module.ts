@@ -2,6 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { WeekandgoSharedModule } from '../../shared';
+import { WeekandgoAdminModule } from '../../admin/admin.module';
 import {
     PersonService,
     PersonPopupService,
@@ -14,7 +15,7 @@ import {
     personRoute,
     personPopupRoute,
 } from './';
-import {EventService} from '../event/event.service';
+import {EventService} from "../event/event.service";
 
 const ENTITY_STATES = [
     ...personRoute,
@@ -24,6 +25,7 @@ const ENTITY_STATES = [
 @NgModule({
     imports: [
         WeekandgoSharedModule,
+        WeekandgoAdminModule,
         RouterModule.forRoot(ENTITY_STATES, { useHash: true })
     ],
     declarations: [

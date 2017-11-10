@@ -44,7 +44,19 @@
             <input type="number" class="form-control" name="distanceMax" id="field_distanceMax"
                 [(ngModel)]="person.distanceMax"  />
         </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_profileCompleted">Profile Completed</label>
+            <input type="checkbox" class="form-control" name="profileCompleted" id="field_profileCompleted"
+                [(ngModel)]="person.profileCompleted"  />
+        </div>
 
+        <div class="form-group">
+            <label class="form-control-label" for="field_user">User</label>
+            <select class="form-control" id="field_user" name="user" [(ngModel)]="person.user" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="userOption.id === person.user?.id ? person.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.id}}</option>
+            </select>
+        </div>
         <div class="form-group">
             <label class="form-control-label" for="field_currentPlace">Current Place</label>
             <select class="form-control" id="field_currentPlace" name="currentPlace" [(ngModel)]="person.currentPlace" >

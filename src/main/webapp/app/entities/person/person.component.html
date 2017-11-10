@@ -23,6 +23,8 @@
             <th><span>Phone Number</span></th>
             <th><span>Birth Date</span></th>
             <th><span>Distance Max</span></th>
+            <th><span>Profile Completed</span></th>
+            <th><span>User</span></th>
             <th><span>Current Place</span></th>
             <th><span>Sport List</span></th>
             <th></th>
@@ -37,6 +39,10 @@
                 <td>{{person.phoneNumber}}</td>
                 <td>{{person.birthDate | date:'medium'}}</td>
                 <td>{{person.distanceMax}}</td>
+                <td>{{person.profileCompleted}}</td>
+                <td>
+                    {{person.user?.id}}
+                </td>
                 <td>
                     <div *ngIf="person.currentPlace">
                         <a [routerLink]="['../place', person.currentPlace?.id ]" >{{person.currentPlace?.id}}</a>

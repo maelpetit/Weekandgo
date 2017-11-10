@@ -103,6 +103,27 @@ public class PersonResource {
     }
 
     /**
+     * GET  /people/user/:id : get the "id" person.
+     *
+     * @param id the id of the person to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the person, or with status 404 (Not Found)
+     */
+    @GetMapping("/people/user/{id}")
+    @Timed
+    public ResponseEntity<Person> getPersonWithUserID(@PathVariable Long id) {
+        log.debug("REST request to get Person : {}", id);
+        Person result = null;
+        for(Person person : personService.findAll()){
+            if(person.getUser().getId() == id){
+                result = person;
+                break;
+            }
+        }
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
+    }
+
+
+    /**
      * DELETE  /people/:id : delete the "id" person.
      *
      * @param id the id of the person to delete

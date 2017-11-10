@@ -9,6 +9,7 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { Person } from './person.model';
 import { PersonPopupService } from './person-popup.service';
 import { PersonService } from './person.service';
+import { User, UserService } from '../../shared';
 import { Place, PlaceService } from '../place';
 import { Sport, SportService } from '../sport';
 import { ResponseWrapper } from '../../shared';
@@ -22,6 +23,8 @@ export class PersonDialogComponent implements OnInit {
     person: Person;
     isSaving: boolean;
 
+    users: User[];
+
     places: Place[];
 
     sports: Sport[];
@@ -30,6 +33,7 @@ export class PersonDialogComponent implements OnInit {
         public activeModal: NgbActiveModal,
         private jhiAlertService: JhiAlertService,
         private personService: PersonService,
+        private userService: UserService,
         private placeService: PlaceService,
         private sportService: SportService,
         private eventManager: JhiEventManager
@@ -38,6 +42,8 @@ export class PersonDialogComponent implements OnInit {
 
     ngOnInit() {
         this.isSaving = false;
+        this.userService.query()
+            .subscribe((res: ResponseWrapper) => { this.users = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
         this.placeService.query()
             .subscribe((res: ResponseWrapper) => { this.places = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
         this.sportService.query()
@@ -76,6 +82,10 @@ export class PersonDialogComponent implements OnInit {
 
     private onError(error: any) {
         this.jhiAlertService.error(error.message, null, null);
+    }
+
+    trackUserById(index: number, item: User) {
+        return item.id;
     }
 
     trackPlaceById(index: number, item: Place) {

@@ -5,8 +5,8 @@ import { JhiEventManager } from 'ng-jhipster';
 
 import { Person } from './person.model';
 import { PersonService } from './person.service';
-import { EventService } from '../event/event.service';
-import { Event } from '../event/event.model';
+import {EventService} from '../event/event.service';
+import {Event} from '../event/event.model';
 
 @Component({
     selector: 'jhi-person-detail',
@@ -16,7 +16,6 @@ export class PersonDetailComponent implements OnInit, OnDestroy {
 
     person: Person;
     event: Event;
-
     private subscription: Subscription;
     private eventSubscriber: Subscription;
 
@@ -26,6 +25,7 @@ export class PersonDetailComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private eventService: EventService
     ) {
+
     }
 
     ngOnInit() {

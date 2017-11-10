@@ -1,4 +1,4 @@
-import { BaseEntity } from './../../shared';
+import { BaseEntity, User } from './../../shared';
 
 export class Person implements BaseEntity {
     constructor(
@@ -9,8 +9,11 @@ export class Person implements BaseEntity {
         public phoneNumber?: string,
         public birthDate?: any,
         public distanceMax?: number,
+        public profileCompleted?: boolean,
+        public user?: User,
         public currentPlace?: BaseEntity,
         public sportLists?: BaseEntity[],
     ) {
+        this.profileCompleted = false;
     }
 }

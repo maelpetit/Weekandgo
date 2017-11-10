@@ -46,6 +46,12 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="profile_completed" type="bit">
+                <constraints nullable="true" />
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints unique="true" nullable="true" />
+            </column>
             <column name="current_place_id" type="bigint">
                 <constraints nullable="true" />
             </column>

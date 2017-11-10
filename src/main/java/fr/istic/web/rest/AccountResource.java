@@ -3,11 +3,13 @@ package fr.istic.web.rest;
 import com.codahale.metrics.annotation.Timed;
 
 import fr.istic.domain.PersistentToken;
+import fr.istic.domain.Person;
 import fr.istic.repository.PersistentTokenRepository;
 import fr.istic.domain.User;
 import fr.istic.repository.UserRepository;
 import fr.istic.security.SecurityUtils;
 import fr.istic.service.MailService;
+import fr.istic.service.PersonService;
 import fr.istic.service.UserService;
 import fr.istic.service.dto.UserDTO;
 import fr.istic.web.rest.errors.*;
@@ -17,6 +19,7 @@ import fr.istic.web.rest.vm.ManagedUserVM;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,6 +45,9 @@ public class AccountResource {
     private final MailService mailService;
 
     private final PersistentTokenRepository persistentTokenRepository;
+
+    @Autowired
+    private PersonService personService;
 
     public AccountResource(UserRepository userRepository, UserService userService, MailService mailService, PersistentTokenRepository persistentTokenRepository) {
 
@@ -69,6 +75,16 @@ public class AccountResource {
         userRepository.findOneByLogin(managedUserVM.getLogin().toLowerCase()).ifPresent(u -> {throw new LoginAlreadyUsedException();});
         userRepository.findOneByEmailIgnoreCase(managedUserVM.getEmail()).ifPresent(u -> {throw new EmailAlreadyUsedException();});
         User user = userService.registerUser(managedUserVM);
+
+        Person person = new Person();
+        person.setEmail(user.getEmail());
+        person.setFirstName(user.getFirstName());
+        person.setLastName(user.getLastName());
+        person.setUser(user);
+        person.setProfileCompleted(false);
+
+        personService.save(person);
+
         mailService.sendActivationEmail(user);
     }
 

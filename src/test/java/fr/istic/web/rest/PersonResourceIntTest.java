@@ -62,6 +62,9 @@ public class PersonResourceIntTest {
     private static final Double DEFAULT_DISTANCE_MAX = 1D;
     private static final Double UPDATED_DISTANCE_MAX = 2D;
 
+    private static final Boolean DEFAULT_PROFILE_COMPLETED = false;
+    private static final Boolean UPDATED_PROFILE_COMPLETED = true;
+
     @Autowired
     private PersonRepository personRepository;
 
@@ -108,7 +111,8 @@ public class PersonResourceIntTest {
             .email(DEFAULT_EMAIL)
             .phoneNumber(DEFAULT_PHONE_NUMBER)
             .birthDate(DEFAULT_BIRTH_DATE)
-            .distanceMax(DEFAULT_DISTANCE_MAX);
+            .distanceMax(DEFAULT_DISTANCE_MAX)
+            .profileCompleted(DEFAULT_PROFILE_COMPLETED);
         return person;
     }
 
@@ -138,6 +142,7 @@ public class PersonResourceIntTest {
         assertThat(testPerson.getPhoneNumber()).isEqualTo(DEFAULT_PHONE_NUMBER);
         assertThat(testPerson.getBirthDate()).isEqualTo(DEFAULT_BIRTH_DATE);
         assertThat(testPerson.getDistanceMax()).isEqualTo(DEFAULT_DISTANCE_MAX);
+        assertThat(testPerson.isProfileCompleted()).isEqualTo(DEFAULT_PROFILE_COMPLETED);
     }
 
     @Test
@@ -175,7 +180,8 @@ public class PersonResourceIntTest {
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())))
             .andExpect(jsonPath("$.[*].phoneNumber").value(hasItem(DEFAULT_PHONE_NUMBER.toString())))
             .andExpect(jsonPath("$.[*].birthDate").value(hasItem(sameInstant(DEFAULT_BIRTH_DATE))))
-            .andExpect(jsonPath("$.[*].distanceMax").value(hasItem(DEFAULT_DISTANCE_MAX.doubleValue())));
+            .andExpect(jsonPath("$.[*].distanceMax").value(hasItem(DEFAULT_DISTANCE_MAX.doubleValue())))
+            .andExpect(jsonPath("$.[*].profileCompleted").value(hasItem(DEFAULT_PROFILE_COMPLETED.booleanValue())));
     }
 
     @Test
@@ -194,7 +200,8 @@ public class PersonResourceIntTest {
             .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL.toString()))
             .andExpect(jsonPath("$.phoneNumber").value(DEFAULT_PHONE_NUMBER.toString()))
             .andExpect(jsonPath("$.birthDate").value(sameInstant(DEFAULT_BIRTH_DATE)))
-            .andExpect(jsonPath("$.distanceMax").value(DEFAULT_DISTANCE_MAX.doubleValue()));
+            .andExpect(jsonPath("$.distanceMax").value(DEFAULT_DISTANCE_MAX.doubleValue()))
+            .andExpect(jsonPath("$.profileCompleted").value(DEFAULT_PROFILE_COMPLETED.booleanValue()));
     }
 
     @Test
@@ -221,7 +228,8 @@ public class PersonResourceIntTest {
             .email(UPDATED_EMAIL)
             .phoneNumber(UPDATED_PHONE_NUMBER)
             .birthDate(UPDATED_BIRTH_DATE)
-            .distanceMax(UPDATED_DISTANCE_MAX);
+            .distanceMax(UPDATED_DISTANCE_MAX)
+            .profileCompleted(UPDATED_PROFILE_COMPLETED);
 
         restPersonMockMvc.perform(put("/api/people")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -238,6 +246,7 @@ public class PersonResourceIntTest {
         assertThat(testPerson.getPhoneNumber()).isEqualTo(UPDATED_PHONE_NUMBER);
         assertThat(testPerson.getBirthDate()).isEqualTo(UPDATED_BIRTH_DATE);
         assertThat(testPerson.getDistanceMax()).isEqualTo(UPDATED_DISTANCE_MAX);
+        assertThat(testPerson.isProfileCompleted()).isEqualTo(UPDATED_PROFILE_COMPLETED);
     }
 
     @Test

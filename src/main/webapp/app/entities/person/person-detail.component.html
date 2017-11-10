@@ -28,6 +28,14 @@
         <dd>
             <span>{{person.distanceMax}}</span>
         </dd>
+        <dt><span>Profile Completed</span></dt>
+        <dd>
+            <span>{{person.profileCompleted}}</span>
+        </dd>
+        <dt><span>User</span></dt>
+        <dd>
+            {{person.user?.id}}
+        </dd>
         <dt><span>Current Place</span></dt>
         <dd>
             <div *ngIf="person.currentPlace">
