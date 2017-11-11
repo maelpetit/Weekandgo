@@ -15,7 +15,7 @@ import {
     personRoute,
     personPopupRoute,
 } from './';
-import {EventService} from "../event/event.service";
+import {EventService} from '../event/event.service';
 
 const ENTITY_STATES = [
     ...personRoute,

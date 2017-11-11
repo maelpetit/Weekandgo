@@ -38,6 +38,20 @@ export class PersonService {
         });
     }
 
+    findByUserID(id: number): Observable<Person> {
+        return this.http.get(`${this.resourceUrl + '/user'}/${id}`).map((res: Response) => {
+            const jsonResponse = res.json();
+            return this.convertItemFromServer(jsonResponse);
+        });
+    }
+
+    findByLogin(login: string): Observable<Person> {
+        return this.http.get(`${this.resourceUrl + '/login'}/${login}`).map((res: Response) => {
+            const jsonResponse = res.json();
+            return this.convertItemFromServer(jsonResponse);
+        });
+    }
+
     query(req?: any): Observable<ResponseWrapper> {
         const options = createRequestOption(req);
         return this.http.get(this.resourceUrl, options)

@@ -122,6 +122,26 @@ public class PersonResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
     }
 
+    /**
+     * GET  /people/login/:id : get the "id" person.
+     *
+     * @param login the login of the person to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the person, or with status 404 (Not Found)
+     */
+    @GetMapping("/people/login/{login}")
+    @Timed
+    public ResponseEntity<Person> getPersonWithLogin(@PathVariable String login) {
+        log.debug("REST request to get Person : {}", login);
+        Person result = null;
+        for(Person person : personService.findAll()){
+            if(person.getUser().getLogin().equals(login)){
+                result = person;
+                break;
+            }
+        }
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
+    }
+
 
     /**
      * DELETE  /people/:id : delete the "id" person.
