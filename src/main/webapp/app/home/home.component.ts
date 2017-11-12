@@ -9,8 +9,9 @@ import {Sport} from '../entities/sport/sport.model';
 import {PlaceService} from '../entities/place/place.service';
 import {SportService} from '../entities/sport/sport.service';
 import {Place} from '../entities/place/place.model';
-import {ResponseWrapper} from "../shared/model/response-wrapper.model";
-import {isNull, isNullOrUndefined} from "util";
+import {ResponseWrapper} from '../shared/model/response-wrapper.model';
+import {isNullOrUndefined} from 'util';
+import {EventService} from '../entities/event/event.service';
 
 @Component({
     selector: 'jhi-home',
@@ -37,7 +38,8 @@ export class HomeComponent implements OnInit {
         private eventManager: JhiEventManager,
         private personService: PersonService,
         private sportService: SportService,
-        private placeService: PlaceService
+        private placeService: PlaceService,
+        private eventService: EventService
     ) {
         this.sports = [];
     }
@@ -98,7 +100,29 @@ export class HomeComponent implements OnInit {
         this.modalRef = this.loginModalService.open();
     }
 
+    update(){
+        console.log(this.person.distanceMax);
+        this.personService.update(this.person).subscribe((person)=>{
+            this.person = person;
+        });
+    }
+
     go(){
+        // CHECK IF SPORTS AND CURRENT PLACE NEED TO BE CHANGED
+        this.saveSports();
+        this.setCurrentPlace();
+        this.update();
+        this.eventService.find(this.person.id).subscribe((event)=>{
+           console.log(event);
+        });
+    }
+
+    saveAndUpdateSports(){
+        this.saveSports();
+        this.update();
+    }
+
+    saveSports(){
         for(const mySport of this.sports){
             if(mySport.checked){
                 if(!this.person.containsSport(mySport.sport.id)){
@@ -110,7 +134,6 @@ export class HomeComponent implements OnInit {
                 }
             }
         }
-        console.log(this.searchText);
     }
 
     searchName(){
@@ -122,9 +145,16 @@ export class HomeComponent implements OnInit {
         }
         console.log(this.placeSearch) ;
     }
+
+    setAndUpdatePlace(){
+        this.setCurrentPlace();
+        this.update();
+    }
+
     setCurrentPlace(){
-        this.person.currentPlace = this.placeSearch[0] ;
-        console.log(this.person.distanceMax) ;
+        if(!isNullOrUndefined(this.placeSearch) && this.placeSearch.length > 0) {
+            this.person.currentPlace = this.placeSearch[0];
+        }
     }
 }
 

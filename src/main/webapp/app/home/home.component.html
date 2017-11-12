@@ -47,6 +47,7 @@
                             {{ mySport.sport.title }}
                         </li>
                     </ul>
+                    <button (click)="saveAndUpdateSports()">VALID</button>
                 </td>
                 <td width="50%">
                     <div class="col-md-12">
@@ -54,9 +55,9 @@
                             <agm-marker [latitude]="person.currentPlace.latitude"  [longitude]="person.currentPlace.longitude" ></agm-marker>
                         </agm-map>
                     </div>
-                    <div class="model-body" >
+                    <div class="model-body">
                         <input [(ngModel)]="searchText" (change)="searchName()" type="text"/>
-                        <button (click)="setCurrentPlace()">VALID</button>
+                        <button (click)="setAndUpdatePlace()">VALID</button>
                         Distance Max :
                         <input [(ngModel)]="person.distanceMax" type="text"/>
                         <ul *ngIf="placeSearch" style="font-size: 1.2em">

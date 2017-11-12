@@ -16,6 +16,8 @@ public class WeekEndCalculator {
         if(person == null){
             return null;
         }
+        FileLog.log(person);
+        FileLog.writeLog("person");
         Set<Event> events = new HashSet<>();
         Map<Pair<Place, Sport>, Double> map = new HashMap<>();
         for(Sport sport : person.getSportLists()){

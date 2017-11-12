@@ -24,7 +24,7 @@ public class FileLog {
     }
 
     public static void log(Object object){
-        if(object != null){
+        if(object == null){
             log("null");
         }else{
             log(object.toString());
