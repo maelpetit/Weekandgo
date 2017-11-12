@@ -98,6 +98,17 @@ export class HomeComponent implements OnInit {
     }
 
     go(){
+        for(const mySport of this.sports){
+            if(mySport.checked){
+                if(!this.person.containsSport(mySport.sport.id)){
+                    this.person.sportLists.push(mySport.sport);
+                }
+            }else{
+                if(this.person.containsSport(mySport.sport.id)){
+                    this.person.removeSport(mySport.sport.id);
+                }
+            }
+        }
         console.log(this.searchText);
     }
 
