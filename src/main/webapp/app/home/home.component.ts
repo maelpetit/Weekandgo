@@ -109,6 +109,7 @@ export class HomeComponent implements OnInit {
                 this.eventService.find(this.person.id).subscribe((event)=>{
                     this.event = event;
                     this._eventReceived = true;
+                    this.event.distance = Math.round(this.event.distance) ;
                     console.log(this.event);
                 });
             }
