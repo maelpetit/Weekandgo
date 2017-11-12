@@ -51,9 +51,9 @@ export class HomeComponent implements OnInit {
     loadAccount(){
         this.principal.identity().then((account) => {
             this.account = account;
-            /*if(!isNullOrUndefined(this.account)){
+            if(!isNullOrUndefined(this.account)){
                 this.loadPerson();
-            }*/
+            }
         });
     }
 

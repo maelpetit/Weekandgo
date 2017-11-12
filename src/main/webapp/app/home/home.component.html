@@ -56,16 +56,18 @@
                             <agm-marker [latitude]="person.currentPlace.latitude"  [longitude]="person.currentPlace.longitude" ></agm-marker>
                         </agm-map>
                     </div>
+                    <br>
+
                     <div class="model-body">
-                        <input [(ngModel)]="searchText" (change)="searchName()" type="text"/>
-                        <button (click)="setAndUpdatePlace()">VALID</button>
-                        Distance Max :
                         <input [(ngModel)]="person.distanceMax" type="text"/>
-                        KM
-                        <ul *ngIf="placeSearch" style="font-size: 1.2em">
-                            Place selectionnée : {{placeSearch[0].nom}}
-                        </ul>
+                        KM => Maximum Distance
+                        <br>
+                        <input [(ngModel)]="searchText" (change)="searchName()" type="text"/>
+                        Press enter to view the different places
+                        <br>
                         <ul *ngIf="placeSearch">
+                        <button (click)="setAndUpdatePlace()">Change current place  to {{placeSearch[0].nom}} </button>
+
                             <li *ngFor="let place of placeSearch" style="font-size: 0.8em">
                                 {{ place.nom }}
                             </li>
