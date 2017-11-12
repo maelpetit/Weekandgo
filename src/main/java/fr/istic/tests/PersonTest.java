@@ -1,6 +1,7 @@
 package fr.istic.tests;
 
 import fr.istic.domain.Person;
+import fr.istic.domain.Place;
 import fr.istic.factories.PersonFactory;
 import fr.istic.service.PersonService;
 import fr.istic.service.PlaceService;
@@ -45,5 +46,13 @@ public class PersonTest {
     public void personEdit(){
         personService.findOne(1L).setDistanceMax(300D);
         personService.findOne(2L).setDistanceMax(400D);
+    }
+
+    public void personAddPlace(){
+        Person person = personService.findOne(1L);
+        Place place = placeService.findOne(425L);
+        person.setCurrentPlace(place);
+
+        personService.save(person);
     }
 }

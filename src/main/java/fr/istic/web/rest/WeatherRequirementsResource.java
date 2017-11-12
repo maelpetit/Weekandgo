@@ -3,11 +3,15 @@ package fr.istic.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import fr.istic.domain.WeatherRequirements;
 import fr.istic.service.WeatherRequirementsService;
+import fr.istic.tests.PersonTest;
+import fr.istic.tests.PlaceTest;
+import fr.istic.tests.SportTest;
 import fr.istic.web.rest.errors.BadRequestAlertException;
 import fr.istic.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

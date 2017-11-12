@@ -59,6 +59,7 @@ export class HomeComponent implements OnInit {
                 mySport.checked = this.person.containsSport(mySport.sport.id);
                 this.sports.push(mySport);
             }
+            console.log(this.sports);
         });
 
         this.placeService.query().subscribe((res: ResponseWrapper) => {

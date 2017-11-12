@@ -1,4 +1,6 @@
 import { BaseEntity, User } from './../../shared';
+import {Place} from '../place/place.model';
+import {Sport} from '../sport/sport.model';
 
 export class Person implements BaseEntity {
     constructor(
@@ -11,9 +13,18 @@ export class Person implements BaseEntity {
         public distanceMax?: number,
         public profileCompleted?: boolean,
         public user?: User,
-        public currentPlace?: BaseEntity,
-        public sportLists?: BaseEntity[],
+        public currentPlace?: Place,
+        public sportLists?: Sport[],
     ) {
         this.profileCompleted = false;
+    }
+
+    containsSport(sportId: number){
+        for(var sport of this.sportLists){
+            if(sport.id === sportId){
+                return true;
+            }
+        }
+        return false;
     }
 }

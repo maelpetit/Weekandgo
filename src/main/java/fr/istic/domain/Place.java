@@ -30,7 +30,7 @@ public class Place implements Serializable {
     @Column(name = "longitude")
     private Double longitude;
 
-    @ManyToMany(mappedBy = "placeLists")
+    @ManyToMany(mappedBy = "placeLists", fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<Sport> sportLists = new HashSet<>();
 

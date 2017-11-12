@@ -62,17 +62,20 @@ public class PlaceTest {
         for(Place place : placeservice.findAll()){
             /*if(footPlaceNames.contains(place.getNom())){
                 footPlaces.add(place);
-            }else if(surfPlaceNames.contains(place.getNom())){
+            }
+            if(surfPlaceNames.contains(place.getNom())){
                 surfPlaces.add(place);
-            }else if(volleyPlaceNames.contains(place.getNom())){
+            }
+            if(volleyPlaceNames.contains(place.getNom())){
                 volleyPlaces.add(place);
-            }else */if(kitesurfPlaceNames.contains(place.getNom())){
+            }*/
+            if(kitesurfPlaceNames.contains(place.getNom())){
                 kitesurfPlaces.add(place);
             }
         }
 
-        FileLog.log(/*"foot:" + footPlaces.size() + " beach volley:" + volleyPlaces.size()
-        + " surf:" + surfPlaces.size() + */" kite:" + kitesurfPlaces.size());
+        /*FileLog.log("foot:" + footPlaces.size() + " beach volley:" + volleyPlaces.size()
+        + " surf:" + surfPlaces.size() + " kite:" + kitesurfPlaces.size());*/
         for(Sport sport : sportService.findAll()){
             /*if(sport.getTitle().equals("Football")){
                 for(Place footPlace : footPlaces){
@@ -86,7 +89,7 @@ public class PlaceTest {
                 for(Place volleyPlace : volleyPlaces){
                     sport.addPlaceList(volleyPlace);
                 }
-            }else*/ if(sport.getTitle().equals("Kite Surf")){
+            }else */if(sport.getTitle().equals("Kite Surf")){
                 for(Place kitesurfPlace : kitesurfPlaces){
                     sport.addPlaceList(kitesurfPlace);
                 }
@@ -94,6 +97,6 @@ public class PlaceTest {
 
             sportService.save(sport);
         }
-        FileLog.writeLog("placesInSportsTest.txt");
+//        FileLog.writeLog("placesInSportsTest.txt");
     }
 }
