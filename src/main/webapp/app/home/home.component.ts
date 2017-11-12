@@ -50,26 +50,26 @@ export class HomeComponent implements OnInit {
         this.loadAccount();
         this.registerAuthenticationSuccess();
     }
-    loadAccount(){
+    loadAccount() {
         this.principal.identity().then((account) => {
             this.account = account;
-            if(!isNullOrUndefined(this.account)){
+            if(!isNullOrUndefined(this.account)) {
                 this.loadPerson();
             }
         });
     }
-    loadPerson(){
+    loadPerson() {
         this.personService.findByLogin(this.account.login).subscribe((person) => {
             this.person = person;
             console.log(this.person);
             this.loadSportsAndPlaces();
         });
     }
-    loadSportsAndPlaces(){
+    loadSportsAndPlaces() {
         this.sports = [];
         this.sportService.query().subscribe((res: ResponseWrapper) => {
-            for(const sport of res.json){
-                let mySport = new MySport();
+            for(const sport of res.json) {
+                const mySport = new MySport();
                 mySport.sport = sport;
                 mySport.checked = this.person.containsSport(mySport.sport.id);
                 this.sports.push(mySport);
@@ -85,7 +85,7 @@ export class HomeComponent implements OnInit {
         this.eventManager.subscribe('authenticationSuccess', (message) => {
             this.principal.identity().then((account) => {
                 this.account = account;
-                if(!isNullOrUndefined(this.account)){
+                if(!isNullOrUndefined(this.account)) {
                     this.loadPerson();
                 }
             });
@@ -97,11 +97,11 @@ export class HomeComponent implements OnInit {
     login() {
         this.modalRef = this.loginModalService.open();
     }
-    update(doEvent: boolean){
-        this.personService.update(this.person).subscribe((person)=>{
+    update(doEvent: boolean) {
+        this.personService.update(this.person).subscribe((person) => {
             this.person = person;
-            if(doEvent){
-                this.eventService.find(this.person.id).subscribe((event)=>{
+            if(doEvent) {
+                this.eventService.find(this.person.id).subscribe((event) => {
                         this.event = event;
                         this._eventReceived = true;
                         this.failEvent = false;
@@ -114,24 +114,23 @@ export class HomeComponent implements OnInit {
             }
         });
     }
-    go(){
+    go() {
         this.saveSports();
         this.setCurrentPlace();
         this.update(true);
     }
-    saveAndUpdateSports(){
+    saveAndUpdateSports() {
         this.saveSports();
         this.update(false);
     }
-
-    saveSports(){
-        for(const mySport of this.sports){
-            if(mySport.checked){
-                if(!this.person.containsSport(mySport.sport.id)){
+    saveSports() {
+        for (const mySport of this.sports) {
+            if (mySport.checked) {
+                if(!this.person.containsSport(mySport.sport.id)) {
                     this.person.sportLists.push(mySport.sport);
                 }
-            }else{
-                if(this.person.containsSport(mySport.sport.id)){
+            } else {
+                if (this.person.containsSport(mySport.sport.id)) {
                     this.person.removeSport(mySport.sport.id);
                 }
             }
@@ -139,38 +138,36 @@ export class HomeComponent implements OnInit {
         console.log(this.sports);
         console.log(this.person.sportLists);
     }
-
-    handleChange(mySport, i){
+    handleChange(mySport, i) {
         this.sports[i].checked = !mySport.checked;
     }
-
-    searchName(){
+    searchName() {
         this.placeSearch = new Array<Place>() ;
-        for (var item of this.places) {
-            if(item.nom.toLowerCase().includes(this.searchText.toLowerCase())){
+        for (const item of this.places) {
+            if (item.nom.toLowerCase().includes(this.searchText.toLowerCase())) {
                 this.placeSearch.push(item) ;
             }
         }
         console.log(this.placeSearch) ;
     }
-    setAndUpdatePlace(){
+    setAndUpdatePlace() {
         this.setCurrentPlace();
         this.update(false);
     }
-    setCurrentPlace(){
-        if(!isNullOrUndefined(this.placeSearch) && this.placeSearch.length > 0) {
+    setCurrentPlace() {
+        if (!isNullOrUndefined(this.placeSearch) && this.placeSearch.length > 0) {
             this.person.currentPlace = this.placeSearch[0];
         }
     }
-    eventReceived(){
+    eventReceived() {
         return this._eventReceived;
     }
-    previous(){
+    previous() {
         this._eventReceived = false;
     }
 }
 
-class MySport{
+class MySport {
     sport: Sport;
     checked: boolean;
 }
