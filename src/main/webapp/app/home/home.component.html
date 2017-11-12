@@ -60,6 +60,7 @@
                         <button (click)="setAndUpdatePlace()">VALID</button>
                         Distance Max :
                         <input [(ngModel)]="person.distanceMax" type="text"/>
+                        KM
                         <ul *ngIf="placeSearch" style="font-size: 1.2em">
                             Place selectionnée : {{placeSearch[0].nom}}
                         </ul>
