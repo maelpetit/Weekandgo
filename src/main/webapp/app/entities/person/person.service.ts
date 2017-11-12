@@ -86,7 +86,7 @@ export class PersonService {
      */
     private convert(person: Person): Person {
         const copy: Person = Object.assign({}, person);
-        copy.birthDate = person.birthDate; //this.dateUtils.toDate(person.birthDate);
+        copy.birthDate = person.birthDate; // this.dateUtils.toDate(person.birthDate);
         return copy;
     }
 }

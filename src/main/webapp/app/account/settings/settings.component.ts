@@ -16,26 +16,23 @@ export class SettingsComponent implements OnInit {
     person: Person;
     birthDate: any;
     languages: any[];
-
     constructor(
         private account: AccountService,
         private personService: PersonService,
         private principal: Principal
     ) {
     }
-
     ngOnInit() {
         this.principal.identity().then((account) => {
             this.settingsAccount = this.copyAccount(account);
             this.loadPerson();
         });
     }
-
-    loadPerson(){
+    loadPerson() {
         this.personService.findByLogin(this.settingsAccount.login).subscribe((person) => {
             this.person = person;
-            if(!isNullOrUndefined(this.person.birthDate)) {
-                const date = new Date(Date.parse(this.person.birthDate)); //yyyy-MM-ddThh:mm
+            if (!isNullOrUndefined(this.person.birthDate)) {
+                const date = new Date(Date.parse(this.person.birthDate));
                 this.birthDate = date.getFullYear() + '-' +
                     this.correctDateString(date.getMonth() + 1) + '-' +
                     this.correctDateString(date.getDate()) + 'T' +
@@ -45,11 +42,9 @@ export class SettingsComponent implements OnInit {
             console.log(this.person);
         });
     }
-
-    correctDateString(date: number){
+    correctDateString(date: number) {
         return date < 10 ? '0' + date : date;
     }
-
     save() {
         this.account.save(this.settingsAccount).subscribe(() => {
             this.error = null;
@@ -62,7 +57,7 @@ export class SettingsComponent implements OnInit {
             this.person.lastName = this.settingsAccount.lastName;
             this.person.email = this.settingsAccount.email;
             this.person.birthDate = this.birthDate;
-            if(!this.person.profileCompleted) {
+            if (!this.person.profileCompleted) {
                 if (!isNullOrUndefined(this.person.phoneNumber) && !isNullOrUndefined(this.person.birthDate)) {
                     this.person.profileCompleted = true;
                 }

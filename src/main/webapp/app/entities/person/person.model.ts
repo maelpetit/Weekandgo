@@ -18,18 +18,18 @@ export class Person implements BaseEntity {
     ) {
         this.profileCompleted = false;
     }
-    containsSport(sportId: number){
-        for(const sport of this.sportLists){
-            if(sport.id === sportId){
+    containsSport(sportId: number) {
+        for (const sport of this.sportLists) {
+            if (sport.id === sportId) {
                 return true;
             }
         }
         return false;
     }
-    removeSport(sportId: number){
-        var sports = new Array<Sport>();
-        for(const sport of this.sportLists){
-            if(sport.id !== sportId){
+    removeSport(sportId: number) {
+        const sports = new Array<Sport>();
+        for (const sport of this.sportLists) {
+            if (sport.id !== sportId) {
                 sports.push(sport);
             }
         }
