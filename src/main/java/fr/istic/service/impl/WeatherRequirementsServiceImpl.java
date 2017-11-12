@@ -60,10 +60,9 @@ public class WeatherRequirementsServiceImpl implements WeatherRequirementsServic
      *  @return the list of entities
      */
     @Override
-    //@Transactional(readOnly = true)
+    @Transactional(readOnly = true)
     public List<WeatherRequirements> findAll() {
         log.debug("Request to get all WeatherRequirements");
-        eventTest.eventTest();
         return weatherRequirementsRepository.findAll();
     }
 

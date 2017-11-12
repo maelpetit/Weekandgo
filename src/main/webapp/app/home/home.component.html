@@ -54,10 +54,17 @@
                             <agm-marker [latitude]="person.currentPlace.latitude"  [longitude]="person.currentPlace.longitude" ></agm-marker>
                         </agm-map>
                     </div>
-                    <div class="modal-body">
-
+                    <div class="model-body" >
                         <input [(ngModel)]="searchText" (change)="searchName()" type="text"/>
-
+                        <button (click)="setCurrentPlace()">VALID</button>
+                        <ul *ngIf="placeSearch" style="font-size: 1.2em">
+                            Place selectionnée : {{placeSearch[0].nom}}
+                        </ul>
+                        <ul *ngIf="placeSearch">
+                            <li *ngFor="let place of placeSearch" style="font-size: 0.8em">
+                                {{ place.nom }}
+                            </li>
+                        </ul>
                     </div>
                 </td>
             </tr>

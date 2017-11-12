@@ -39,7 +39,6 @@ export class HomeComponent implements OnInit {
     ) {
         this.sports = [];
     }
-
     ngOnInit() {
         this.loadAccount();
         this.registerAuthenticationSuccess();
@@ -115,11 +114,14 @@ export class HomeComponent implements OnInit {
     searchName(){
         this.placeSearch = new Array<Place>() ;
         for (var item of this.places) {
-            if(item.nom.includes(this.searchText)){
+            if(item.nom.toLowerCase().includes(this.searchText.toLowerCase())){
                 this.placeSearch.push(item) ;
             }
         }
         console.log(this.placeSearch) ;
+    }
+    setCurrentPlace(){
+        this.person.currentPlace = this.placeSearch[0] ;
     }
 }
 

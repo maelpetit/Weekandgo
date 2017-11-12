@@ -32,6 +32,7 @@ public class WeatherRequirementsResource {
 
     private static final String ENTITY_NAME = "weatherRequirements";
 
+
     private final WeatherRequirementsService weatherRequirementsService;
 
     public WeatherRequirementsResource(WeatherRequirementsService weatherRequirementsService) {

@@ -6,14 +6,15 @@ import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 import { Person } from './person.model';
 import { PersonService } from './person.service';
 import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
+import {Place} from "../place/place.model";
 
 @Component({
     selector: 'jhi-person',
     templateUrl: './person.component.html'
 })
 export class PersonComponent implements OnInit, OnDestroy {
-people: Person[];
-    currentAccount: any;
+    people: Person[];
+    currentAccount: Place;
     eventSubscriber: Subscription;
 
     constructor(
