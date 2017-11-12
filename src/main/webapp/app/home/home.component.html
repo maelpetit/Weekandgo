@@ -1,4 +1,4 @@
-<div [ngSwitch]="isAuthenticated()">
+<div [ngSwitch]="isAuthenticated()" >
     <div class="row" *ngSwitchCase="false">
         <div class="col-md-3">
             <span class="hipster img-fluid rounded"></span>
@@ -36,47 +36,75 @@
         </div>
     </div>
     <div *ngSwitchCase="true" >
-        <table *ngIf="person" border="1" width="100%">
-            <th>Sports </th>
-            <th>Current Place : {{person.currentPlace.nom}} </th>
+        <div [ngSwitch]="eventReceived()">
+            <div *ngSwitchCase="false" >
+                <div align="center">
+                    <button (click)="go()" class="btn fa-5x btn-danger">GO</button>
+                </div>
+                <br>
+                <table *ngIf="person" border="0" width="100%">
+                    <th class="fa-2x ">Sports </th>
+                    <th class="fa-2x">Current Place : {{person.currentPlace.nom}} </th>
+                    <tr>
+                        <td width="50%">
+                            <ul >
+                                <li *ngFor="let mySport of sports; let i = index;">
+                                    <div style="font-size: larger">
+                                    <input type="checkbox" [checked]=mySport.checked (change)="handleChange(mySport, i)" class="big-checkbox"/>
 
-            <tr>
-                <td width="50%">
-                    <ul>
-                        <li *ngFor="let mySport of sports; let i = index;">
-                            <input type="checkbox" [checked]=mySport.checked (change)="handleChange(mySport, i)" />
-                            {{ mySport.sport.title }}
-                        </li>
-                    </ul>
-                    <button (click)="saveAndUpdateSports()">VALID</button>
-                </td>
-                <td width="50%">
-                    <div class="col-md-12">
-                        <agm-map [latitude]="person.currentPlace.latitude" [longitude]="person.currentPlace.longitude" >
-                            <agm-marker [latitude]="person.currentPlace.latitude"  [longitude]="person.currentPlace.longitude" ></agm-marker>
-                        </agm-map>
-                    </div>
-                    <br>
+                                        {{mySport.sport.title}}
+                                    </div>
+                                </li>
+                            </ul>
+                            <div align="center">
 
-                    <div class="model-body">
-                        <input [(ngModel)]="person.distanceMax" type="text"/>
-                        KM => Maximum Distance
-                        <br>
-                        <input [(ngModel)]="searchText" (change)="searchName()" type="text"/>
-                        Press enter to view the different places
-                        <br>
-                        <ul *ngIf="placeSearch">
-                        <button (click)="setAndUpdatePlace()">Change current place  to {{placeSearch[0].nom}} </button>
+                                <button (click)="saveAndUpdateSports()" class="btn btn-primary">VALID</button>
 
-                            <li *ngFor="let place of placeSearch" style="font-size: 0.8em">
-                                {{ place.nom }}
-                            </li>
-                        </ul>
-                    </div>
-                </td>
-            </tr>
-        </table>
+                            </div>
+                        </td>
+                        <td width="50%">
+                            <div class="col-md-12">
+                                <agm-map [latitude]="person.currentPlace.latitude" [longitude]="person.currentPlace.longitude" >
+                                    <agm-marker [latitude]="person.currentPlace.latitude"  [longitude]="person.currentPlace.longitude" ></agm-marker>
+                                </agm-map>
+                            </div>
+                            <br>
 
-        <button (click)="go()">GO</button>
+                            <div class="model-body">
+                                <input [(ngModel)]="person.distanceMax" type="text"/>
+                                KM => Maximum Distance
+                                <br>
+                                <input [(ngModel)]="searchText" (change)="searchName()" type="text"/>
+                                Press enter to view the different places
+                                <br>
+                                <button *ngIf="placeSearch" class="btn btn-primary" (click)="setAndUpdatePlace()">Change current place  to {{placeSearch[0].nom}} </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+
+                        </td>
+                        <td>
+                            <ul *ngIf="placeSearch">
+
+
+                                <li *ngFor="let place of placeSearch" style="font-size: 0.8em">
+                                    {{ place.nom }}
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div *ngSwitchCase="true">
+                <button type="submit"
+                        (click)="previous()"
+                        class="btn btn-info">
+                    <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+                </button>
+                {{event.distance}}
+            </div>
+        </div>
     </div>
 </div>

@@ -29,8 +29,8 @@ export class HomeComponent implements OnInit {
     places: Place[];
     placeSearch: Place[];
     searchText: string;
-    dist: number ;
-    distmax: number;
+    _eventReceived: boolean;
+    event: any;
 
     constructor(
         private principal: Principal,
@@ -42,6 +42,7 @@ export class HomeComponent implements OnInit {
         private eventService: EventService
     ) {
         this.sports = [];
+        this._eventReceived = false;
     }
     ngOnInit() {
         this.loadAccount();
@@ -102,12 +103,13 @@ export class HomeComponent implements OnInit {
     }
 
     update(doEvent: boolean){
-        console.log(this.person.distanceMax);
         this.personService.update(this.person).subscribe((person)=>{
             this.person = person;
             if(doEvent){
                 this.eventService.find(this.person.id).subscribe((event)=>{
-                    console.log(event);
+                    this.event = event;
+                    this._eventReceived = true;
+                    console.log(this.event);
                 });
             }
         });
@@ -164,6 +166,14 @@ export class HomeComponent implements OnInit {
         if(!isNullOrUndefined(this.placeSearch) && this.placeSearch.length > 0) {
             this.person.currentPlace = this.placeSearch[0];
         }
+    }
+
+    eventReceived(){
+        return this._eventReceived;
+    }
+
+    previous(){
+        this._eventReceived = false;
     }
 }
 
