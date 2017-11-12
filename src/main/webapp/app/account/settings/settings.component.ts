@@ -34,12 +34,14 @@ export class SettingsComponent implements OnInit {
     loadPerson(){
         this.personService.findByLogin(this.settingsAccount.login).subscribe((person) => {
             this.person = person;
-            const date = new Date(Date.parse(this.person.birthDate)); //yyyy-MM-ddThh:mm
-            this.birthDate = date.getFullYear() + '-' +
-                this.correctDateString(date.getMonth() + 1) + '-' +
-                this.correctDateString(date.getDate()) + 'T' +
-                this.correctDateString(date.getHours()) + ':' +
-                this.correctDateString(date.getMinutes());
+            if(!isNullOrUndefined(this.person.birthDate)) {
+                const date = new Date(Date.parse(this.person.birthDate)); //yyyy-MM-ddThh:mm
+                this.birthDate = date.getFullYear() + '-' +
+                    this.correctDateString(date.getMonth() + 1) + '-' +
+                    this.correctDateString(date.getDate()) + 'T' +
+                    this.correctDateString(date.getHours()) + ':' +
+                    this.correctDateString(date.getMinutes());
+            }
             console.log(this.person);
         });
     }
