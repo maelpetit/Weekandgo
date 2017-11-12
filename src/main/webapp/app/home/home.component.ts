@@ -50,7 +50,6 @@ export class HomeComponent implements OnInit {
         this.loadAccount();
         this.registerAuthenticationSuccess();
     }
-
     loadAccount(){
         this.principal.identity().then((account) => {
             this.account = account;
@@ -59,7 +58,6 @@ export class HomeComponent implements OnInit {
             }
         });
     }
-
     loadPerson(){
         this.personService.findByLogin(this.account.login).subscribe((person) => {
             this.person = person;
@@ -67,7 +65,6 @@ export class HomeComponent implements OnInit {
             this.loadSportsAndPlaces();
         });
     }
-
     loadSportsAndPlaces(){
         this.sports = [];
         this.sportService.query().subscribe((res: ResponseWrapper) => {
@@ -84,7 +81,6 @@ export class HomeComponent implements OnInit {
             this.places = res.json;
         });
     }
-
     registerAuthenticationSuccess() {
         this.eventManager.subscribe('authenticationSuccess', (message) => {
             this.principal.identity().then((account) => {
@@ -95,15 +91,12 @@ export class HomeComponent implements OnInit {
             });
         });
     }
-
     isAuthenticated() {
         return this.principal.isAuthenticated();
     }
-
     login() {
         this.modalRef = this.loginModalService.open();
     }
-
     update(doEvent: boolean){
         this.personService.update(this.person).subscribe((person)=>{
             this.person = person;
@@ -121,13 +114,11 @@ export class HomeComponent implements OnInit {
             }
         });
     }
-
     go(){
         this.saveSports();
         this.setCurrentPlace();
         this.update(true);
     }
-
     saveAndUpdateSports(){
         this.saveSports();
         this.update(false);
@@ -162,22 +153,18 @@ export class HomeComponent implements OnInit {
         }
         console.log(this.placeSearch) ;
     }
-
     setAndUpdatePlace(){
         this.setCurrentPlace();
         this.update(false);
     }
-
     setCurrentPlace(){
         if(!isNullOrUndefined(this.placeSearch) && this.placeSearch.length > 0) {
             this.person.currentPlace = this.placeSearch[0];
         }
     }
-
     eventReceived(){
         return this._eventReceived;
     }
-
     previous(){
         this._eventReceived = false;
     }

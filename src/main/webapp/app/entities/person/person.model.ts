@@ -18,7 +18,6 @@ export class Person implements BaseEntity {
     ) {
         this.profileCompleted = false;
     }
-
     containsSport(sportId: number){
         for(const sport of this.sportLists){
             if(sport.id === sportId){
@@ -27,7 +26,6 @@ export class Person implements BaseEntity {
         }
         return false;
     }
-
     removeSport(sportId: number){
         var sports = new Array<Sport>();
         for(const sport of this.sportLists){

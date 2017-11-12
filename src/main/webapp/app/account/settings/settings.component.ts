@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Principal, AccountService } from '../../shared';
 import {PersonService} from '../../entities/person/person.service';
 import {Person} from '../../entities/person/person.model';
-import {isNullOrUndefined} from "util";
+import {isNullOrUndefined} from 'util';
 
 @Component({
     selector: 'jhi-settings',
