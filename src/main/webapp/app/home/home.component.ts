@@ -10,6 +10,7 @@ import {PlaceService} from '../entities/place/place.service';
 import {SportService} from '../entities/sport/sport.service';
 import {Place} from '../entities/place/place.model';
 import {ResponseWrapper} from "../shared/model/response-wrapper.model";
+import {isNull, isNullOrUndefined} from "util";
 
 @Component({
     selector: 'jhi-home',
@@ -25,6 +26,8 @@ export class HomeComponent implements OnInit {
     person: Person;
     sports: MySport[];
     places: Place[];
+    placeSearch: Place[];
+    searchText: string;
 
     constructor(
         private principal: Principal,
@@ -38,23 +41,31 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.loadAccount();
+        this.registerAuthenticationSuccess();
+    }
+
+    loadAccount(){
         this.principal.identity().then((account) => {
             this.account = account;
-            this.personService.findByLogin(this.account.login).subscribe((person) => {
-               this.person = person;
-               console.log(this.person);
-               this.loadSportsAndPlaces();
-            });
-
+            if(!isNullOrUndefined(this.account)){
+                this.loadPerson();
+            }
         });
-        this.registerAuthenticationSuccess();
+    }
 
+    loadPerson(){
+        this.personService.findByLogin(this.account.login).subscribe((person) => {
+            this.person = person;
+            console.log(this.person);
+            this.loadSportsAndPlaces();
+        });
     }
 
     loadSportsAndPlaces(){
         this.sportService.query().subscribe((res: ResponseWrapper) => {
-            for(var sport of res.json){
-                var mySport = new MySport();
+            for(const sport of res.json){
+                let mySport = new MySport();
                 mySport.sport = sport;
                 mySport.checked = this.person.containsSport(mySport.sport.id);
                 this.sports.push(mySport);
@@ -71,6 +82,9 @@ export class HomeComponent implements OnInit {
         this.eventManager.subscribe('authenticationSuccess', (message) => {
             this.principal.identity().then((account) => {
                 this.account = account;
+                if(!isNullOrUndefined(this.account)){
+                    this.loadPerson();
+                }
             });
         });
     }
@@ -84,7 +98,17 @@ export class HomeComponent implements OnInit {
     }
 
     go(){
+        console.log(this.searchText);
+    }
 
+    searchName(){
+        this.placeSearch = new Array<Place>() ;
+        for (var item of this.places) {
+            if(item.nom.includes(this.searchText)){
+                this.placeSearch.push(item) ;
+            }
+        }
+        console.log(this.placeSearch) ;
     }
 }
 
