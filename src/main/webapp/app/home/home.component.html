@@ -42,8 +42,8 @@
             <tr>
                 <td width="50%">
                     <ul>
-                        <li *ngFor="let mySport of sports">
-                            <input type="checkbox" [checked]=mySport.checked />
+                        <li *ngFor="let mySport of sports; let i = index;">
+                            <input type="checkbox" [checked]=mySport.checked (change)="handleChange(mySport, i)" />
                             {{ mySport.sport.title }}
                         </li>
                     </ul>

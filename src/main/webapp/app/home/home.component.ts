@@ -51,9 +51,9 @@ export class HomeComponent implements OnInit {
     loadAccount(){
         this.principal.identity().then((account) => {
             this.account = account;
-            if(!isNullOrUndefined(this.account)){
+            /*if(!isNullOrUndefined(this.account)){
                 this.loadPerson();
-            }
+            }*/
         });
     }
 
@@ -66,6 +66,7 @@ export class HomeComponent implements OnInit {
     }
 
     loadSportsAndPlaces(){
+        this.sports = [];
         this.sportService.query().subscribe((res: ResponseWrapper) => {
             for(const sport of res.json){
                 let mySport = new MySport();
@@ -100,10 +101,15 @@ export class HomeComponent implements OnInit {
         this.modalRef = this.loginModalService.open();
     }
 
-    update(){
+    update(doEvent: boolean){
         console.log(this.person.distanceMax);
         this.personService.update(this.person).subscribe((person)=>{
             this.person = person;
+            if(doEvent){
+                this.eventService.find(this.person.id).subscribe((event)=>{
+                    console.log(event);
+                });
+            }
         });
     }
 
@@ -111,15 +117,12 @@ export class HomeComponent implements OnInit {
         // CHECK IF SPORTS AND CURRENT PLACE NEED TO BE CHANGED
         this.saveSports();
         this.setCurrentPlace();
-        this.update();
-        this.eventService.find(this.person.id).subscribe((event)=>{
-           console.log(event);
-        });
+        this.update(true);
     }
 
     saveAndUpdateSports(){
         this.saveSports();
-        this.update();
+        this.update(false);
     }
 
     saveSports(){
@@ -134,6 +137,12 @@ export class HomeComponent implements OnInit {
                 }
             }
         }
+        console.log(this.sports);
+        console.log(this.person.sportLists);
+    }
+
+    handleChange(mySport, i){
+        this.sports[i].checked = !mySport.checked;
     }
 
     searchName(){
@@ -148,7 +157,7 @@ export class HomeComponent implements OnInit {
 
     setAndUpdatePlace(){
         this.setCurrentPlace();
-        this.update();
+        this.update(false);
     }
 
     setCurrentPlace(){

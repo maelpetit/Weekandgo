@@ -50,11 +50,18 @@ public class Event {
         this.distance = distance;
     }
 
+    /**
+     * Compares 2 events
+     * @param event1
+     * @param event2
+     * @return 1 if event1 > event2, -1 if event1 < event2 and 0 if equals
+     *
+     */
     public static int compare(Event event1 , Event event2){
-        if(event1.getDistance() > event2.getDistance()){
+        if(event1.getDistance() < event2.getDistance()){
             return 1;
         }
-        if(event1.getDistance() < event2.getDistance()){
+        if(event1.getDistance() > event2.getDistance()){
             return -1;
         }
         return 0;

@@ -5,6 +5,7 @@ import fr.istic.domain.*;
 import fr.istic.log.FileLog;
 import javafx.util.Pair;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -16,8 +17,6 @@ public class WeekEndCalculator {
         if(person == null){
             return null;
         }
-        FileLog.log(person);
-        FileLog.writeLog("person");
         Set<Event> events = new HashSet<>();
         Map<Pair<Place, Sport>, Double> map = new HashMap<>();
         for(Sport sport : person.getSportLists()){
@@ -48,7 +47,7 @@ public class WeekEndCalculator {
                     event.setSport(sport);
                     event.setWeather(weather);
                     events.add(event);
-                    FileLog.log("Event added");
+                    FileLog.log(event);
                     break;
                 }
             }
@@ -65,7 +64,8 @@ public class WeekEndCalculator {
                 bestEvent = event;
             }
         }
-
+        FileLog.log("best event" + bestEvent.toString());
+        FileLog.writeLog("bite");
         return bestEvent;
     }
 }
