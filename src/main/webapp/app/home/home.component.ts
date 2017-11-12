@@ -53,7 +53,7 @@ export class HomeComponent implements OnInit {
     loadAccount() {
         this.principal.identity().then((account) => {
             this.account = account;
-            if(!isNullOrUndefined(this.account)) {
+            if (!isNullOrUndefined(this.account)) {
                 this.loadPerson();
             }
         });
@@ -68,7 +68,7 @@ export class HomeComponent implements OnInit {
     loadSportsAndPlaces() {
         this.sports = [];
         this.sportService.query().subscribe((res: ResponseWrapper) => {
-            for(const sport of res.json) {
+            for (const sport of res.json) {
                 const mySport = new MySport();
                 mySport.sport = sport;
                 mySport.checked = this.person.containsSport(mySport.sport.id);
@@ -85,7 +85,7 @@ export class HomeComponent implements OnInit {
         this.eventManager.subscribe('authenticationSuccess', (message) => {
             this.principal.identity().then((account) => {
                 this.account = account;
-                if(!isNullOrUndefined(this.account)) {
+                if (!isNullOrUndefined(this.account)) {
                     this.loadPerson();
                 }
             });
@@ -100,7 +100,7 @@ export class HomeComponent implements OnInit {
     update(doEvent: boolean) {
         this.personService.update(this.person).subscribe((person) => {
             this.person = person;
-            if(doEvent) {
+            if (doEvent) {
                 this.eventService.find(this.person.id).subscribe((event) => {
                         this.event = event;
                         this._eventReceived = true;
@@ -126,7 +126,7 @@ export class HomeComponent implements OnInit {
     saveSports() {
         for (const mySport of this.sports) {
             if (mySport.checked) {
-                if(!this.person.containsSport(mySport.sport.id)) {
+                if (!this.person.containsSport(mySport.sport.id)) {
                     this.person.sportLists.push(mySport.sport);
                 }
             } else {
@@ -163,7 +163,7 @@ export class HomeComponent implements OnInit {
         return this._eventReceived;
     }
     previous() {
-        this._eventReceived = false;
+        this._eventReceived = false ;
     }
 }
 
