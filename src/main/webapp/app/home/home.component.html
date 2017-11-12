@@ -40,6 +40,9 @@
             <div *ngSwitchCase="false" >
                 <div align="center">
                     <button (click)="go()" class="btn fa-5x btn-danger">GO</button>
+                    <div *ngIf="failEvent" class="fa-2x">
+                        No Event was found sorry.
+                    </div>
                 </div>
                 <br>
                 <table *ngIf="person" border="0" width="100%">
@@ -72,24 +75,22 @@
 
                             <div class="model-body">
                                 <input [(ngModel)]="person.distanceMax" type="text"/>
-                                KM => Maximum Distance
-                                <br>
+                                km <span class="fa fa-arrow-right"></span> Maximum Distance
+                                <br><br>
                                 <input [(ngModel)]="searchText" (change)="searchName()" type="text"/>
-                                Press enter to view the different places
-                                <br>
+                                Press enter to search
+                                <br><br>
                                 <button *ngIf="placeSearch" class="btn btn-primary" (click)="setAndUpdatePlace()">Change current place  to {{placeSearch[0].nom}} </button>
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td>
-
                         </td>
                         <td>
+                            <br>
                             <ul *ngIf="placeSearch">
-
-
-                                <li *ngFor="let place of placeSearch" style="font-size: 0.8em">
+                                <li *ngFor="let place of placeSearch" style="font-size: 1em">
                                     {{ place.nom }}
                                 </li>
                             </ul>
@@ -142,6 +143,9 @@
                     {{event.weather.temperature}} °C
                     <br>
                     {{event.weather.clouds}} % clouds
+                    <div *ngIf="event.weather.precipitation">
+                        {{event.weather.precipitation.type}}
+                    </div>
                 </div>
             </div>
         </div>

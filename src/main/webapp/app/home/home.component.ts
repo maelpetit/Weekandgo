@@ -30,6 +30,7 @@ export class HomeComponent implements OnInit {
     placeSearch: Place[];
     searchText: string;
     _eventReceived: boolean;
+    failEvent: boolean;
     event: any;
 
     constructor(
@@ -43,6 +44,7 @@ export class HomeComponent implements OnInit {
     ) {
         this.sports = [];
         this._eventReceived = false;
+        this.failEvent = false;
     }
     ngOnInit() {
         this.loadAccount();
@@ -107,17 +109,20 @@ export class HomeComponent implements OnInit {
             this.person = person;
             if(doEvent){
                 this.eventService.find(this.person.id).subscribe((event)=>{
-                    this.event = event;
-                    this._eventReceived = true;
-                    this.event.distance = Math.round(this.event.distance) ;
-                    console.log(this.event);
-                });
+                        this.event = event;
+                        this._eventReceived = true;
+                        this.failEvent = false;
+                        this.event.distance = Math.round(this.event.distance) ;
+                        console.log(this.event);
+                    },
+                    () => {
+                        this.failEvent = true;
+                    });
             }
         });
     }
 
     go(){
-        // CHECK IF SPORTS AND CURRENT PLACE NEED TO BE CHANGED
         this.saveSports();
         this.setCurrentPlace();
         this.update(true);
