@@ -28,6 +28,8 @@ export class HomeComponent implements OnInit {
     places: Place[];
     placeSearch: Place[];
     searchText: string;
+    dist: number ;
+    distmax: number;
 
     constructor(
         private principal: Principal,
@@ -122,6 +124,7 @@ export class HomeComponent implements OnInit {
     }
     setCurrentPlace(){
         this.person.currentPlace = this.placeSearch[0] ;
+        console.log(this.person.distanceMax) ;
     }
 }
 

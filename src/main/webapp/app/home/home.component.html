@@ -57,6 +57,8 @@
                     <div class="model-body" >
                         <input [(ngModel)]="searchText" (change)="searchName()" type="text"/>
                         <button (click)="setCurrentPlace()">VALID</button>
+                        Distance Max :
+                        <input [(ngModel)]="person.distanceMax" type="text"/>
                         <ul *ngIf="placeSearch" style="font-size: 1.2em">
                             Place selectionnée : {{placeSearch[0].nom}}
                         </ul>
