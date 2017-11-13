@@ -354,6 +354,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
+                    <fork>true</fork>
+                    <executable>/usr/lib/jvm/jdk1.8.0_144/bin/javac</executable>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.mapstruct</groupId>
@@ -558,8 +560,7 @@
                 <groupId>com.spotify</groupId>
                 <artifactId>dockerfile-maven-plugin</artifactId>
                 <version>${dockerfile-maven-plugin.version}</version>
-                <!--
-                Uncomment the section below to build the docker image with mvn package and and push it with mvn deploy
+                <!--Uncomment the section below to build the docker image with mvn package and and push it with mvn deploy-->
                 <executions>
                     <execution>
                     <id>default</id>
@@ -569,7 +570,6 @@
                     </goals>
                     </execution>
                 </executions>
-                -->
                 <configuration>
                     <repository>weekandgo</repository>
                     <tag>latest</tag>

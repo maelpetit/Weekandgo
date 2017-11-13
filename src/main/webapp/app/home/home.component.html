@@ -18,114 +18,120 @@
     <div *ngSwitchCase="true" >
         <div [ngSwitch]="eventReceived()">
             <div *ngSwitchCase="false" >
-                <div align="center">
-                    <button (click)="go()" class="btn fa-5x btn-danger">GO</button>
-                    <div *ngIf="failEvent" class="fa-2x">
-                        No Event was found sorry.
+                    <div *ngIf="person">
+                    <div align="center">
+                        <button (click)="go()" class="btn fa-5x btn-danger">GO</button>
+                        <div *ngIf="failEvent" class="fa-2x">
+                            No Event was found sorry.
+                        </div>
                     </div>
-                </div>
-                <br>
-                <table *ngIf="person" border="0" width="100%">
-                    <th class="fa-2x ">Sports </th>
-                    <th class="fa-2x">Current Place : {{person.currentPlace.nom}} </th>
-                    <tr>
-                        <td width="50%">
-                            <ul >
-                                <li *ngFor="let mySport of sports; let i = index;">
-                                    <div style="font-size: larger">
-                                        <input type="checkbox" [checked]=mySport.checked (change)="handleChange(mySport, i)" class="big-checkbox"/>
-
-                                        {{mySport.sport.title}}
-                                    </div>
-                                </li>
-                            </ul>
-                            <div align="center">
-
-                                <button (click)="saveAndUpdateSports()" class="btn btn-primary">VALID</button>
-
-                            </div>
-                        </td>
-                        <td width="50%">
-                            <div class="col-md-12">
-                                <agm-map [latitude]="person.currentPlace.latitude" [longitude]="person.currentPlace.longitude" >
-                                    <agm-marker [latitude]="person.currentPlace.latitude"  [longitude]="person.currentPlace.longitude" ></agm-marker>
-                                </agm-map>
-                            </div>
-                            <br>
-
-                            <div class="model-body">
-                                <input [(ngModel)]="person.distanceMax" type="text"/>
-                                km <span class="fa fa-arrow-right"></span> Maximum Distance
-                                <br><br>
-                                <input [(ngModel)]="searchText" (change)="searchName()" type="text"/>
-                                Press enter to search
-                                <br><br>
-                                <button *ngIf="placeSearch" class="btn btn-primary" (click)="setAndUpdatePlace()">Change current place  to {{placeSearch[0].nom}} </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                        </td>
-                        <td>
-                            <br>
-                            <ul *ngIf="placeSearch">
-                                <li *ngFor="let place of placeSearch" style="font-size: 1em">
-                                    {{ place.nom }}
-                                </li>
-                            </ul>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div *ngSwitchCase="true" >
-                <button type="submit"
-                        (click)="previous()"
-                        class="btn btn-info">
-                    <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
-                </button>
-                <br>
-                <hr>
-                <div class="col-md-12">
-                    <agm-map [latitude]="event.place.latitude" [longitude]="event.place.longitude" >
-                        <agm-marker [latitude]="event.place.latitude"  [longitude]="event.place.longitude" ></agm-marker>
-                    </agm-map>
-                </div>
-                <br>
-                <hr>
-                <div class="fa fa-3x">
-                    {{event.place.nom}}
-
-                    <span class="fa fa-arrow-right"></span>
-                    {{event.distance}} KM
-                </div>
-                <br>
-                <hr>
-                <div class="fa fa-3x">
-                    Activity : {{event.sport.title}}
-                </div>
-                <br>
-                <hr>
-                <div class="fa fa-2x">
-                    The {{event.date}}
                     <br>
+                    <table  border="0" width="100%">
+                        <th class="fa-2x ">Sports </th>
+                        <th class="fa-2x">Current Place : {{person.currentPlace.nom}} </th>
+                        <tr>
+                            <td width="50%">
+                                <ul >
+                                    <li *ngFor="let mySport of sports; let i = index;">
+                                        <div style="font-size: larger">
+                                            <input type="checkbox" [checked]=mySport.checked (change)="handleChange(mySport, i)" class="big-checkbox"/>
+
+                                            {{mySport.sport.title}}
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div align="center">
+
+                                    <button (click)="saveAndUpdateSports()" class="btn btn-primary">VALID</button>
+
+                                </div>
+                            </td>
+                            <td width="50%">
+                                <div class="col-md-12">
+                                    <agm-map [latitude]="person.currentPlace.latitude" [longitude]="person.currentPlace.longitude" >
+                                        <agm-marker [latitude]="person.currentPlace.latitude"  [longitude]="person.currentPlace.longitude" ></agm-marker>
+                                    </agm-map>
+                                </div>
+                                <br>
+
+                                <div class="model-body">
+                                    <input [(ngModel)]="person.distanceMax" type="text"/>
+                                    km <span class="fa fa-arrow-right"></span> Maximum Distance
+                                    <br><br>
+                                    <input [(ngModel)]="searchText" (change)="searchName()" type="text"/>
+                                    Press enter to search
+                                    <br><br>
+                                    <button *ngIf="placeSearch" class="btn btn-primary" (click)="setAndUpdatePlace()">Change current place  to {{placeSearch[0].nom}} </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                                <br>
+                                <ul *ngIf="placeSearch || placeSearch.length > 0">
+                                    <li *ngFor="let place of placeSearch" style="font-size: 1em">
+                                        {{ place.nom }}
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
-                <br>
-                <hr>
-                <div class="fa fa-3x">
+                <div *ngSwitchCase="true" >
+                    <button type="submit"
+                            (click)="previous()"
+                            class="btn btn-info">
+                        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+                    </button>
+                    <br>
+                    <hr>
+                    <div class="col-md-12">
+                        <agm-map [latitude]="event.place.latitude" [longitude]="event.place.longitude" >
+                            <agm-marker [latitude]="event.place.latitude"  [longitude]="event.place.longitude" ></agm-marker>
+                        </agm-map>
+                    </div>
+                    <br>
+                    <hr>
+                    <div class="fa fa-3x">
+                        {{event.place.nom}}
+
+                        <span class="fa fa-arrow-right"></span>
+                        {{event.distance}} KM
+                    </div>
+                    <br>
+                    <hr>
+                    <div class="fa fa-3x">
+                        Activity : {{event.sport.title}}
+                    </div>
+                    <br>
+                    <hr>
+                    <div class="fa fa-2x">
+                        The {{event.date}}
+                        <br>
+                    </div>
+                    <br>
+                    <hr>
+                    <div class="fa fa-3x">
                         Weather :
-                </div>
-                <br>
-                <div class="fa fa-2x">
-                    <br>
-                    {{event.weather.humidity}} % of humidity
-                    <br>
-                    {{event.weather.temperature}} °C
-                    <br>
-                    {{event.weather.clouds}} % clouds
-                    <div *ngIf="event.weather.precipitation">
-                        {{event.weather.precipitation.type}}
                     </div>
+                    <br>
+                    <div class="fa fa-2x">
+                        <br>
+                        {{event.weather.humidity}} % of humidity
+                        <br>
+                        {{event.weather.temperature}} °C
+                        <br>
+                        {{event.weather.clouds}} % clouds
+                        <div *ngIf="event.weather.precipitation">
+                            {{event.weather.precipitation.type}}
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div *ngIf="person == null">
+                    ADMIN SESSION
                 </div>
             </div>
         </div>

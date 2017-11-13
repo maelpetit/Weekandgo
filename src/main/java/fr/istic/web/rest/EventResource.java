@@ -24,7 +24,7 @@ import java.util.Optional;
 @RequestMapping("/api")
 public class EventResource {
 
-    private final Logger log = LoggerFactory.getLogger(PersonResource.class);
+    private final Logger log = LoggerFactory.getLogger(EventResource.class);
 
     @Autowired
     private PersonService personService;
