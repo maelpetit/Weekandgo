@@ -32,6 +32,7 @@ export class HomeComponent implements OnInit {
     _eventReceived: boolean;
     failEvent: boolean;
     event: any;
+    isAdmin: boolean;
 
     constructor(
         private principal: Principal,
@@ -59,6 +60,12 @@ export class HomeComponent implements OnInit {
         });
     }
     loadPerson() {
+        this.isAdmin = false;
+        for (const role of this.account.authorities) {
+            if (role === 'ROLE_ADMIN') {
+                this.isAdmin = true;
+            }
+        }
         this.personService.findByLogin(this.account.login).subscribe((person) => {
             this.person = person;
             console.log(this.person);

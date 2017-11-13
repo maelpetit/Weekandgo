@@ -18,7 +18,7 @@
     <div *ngSwitchCase="true" >
         <div [ngSwitch]="eventReceived()">
             <div *ngSwitchCase="false" >
-                    <div *ngIf="person">
+                    <div *ngIf="! isAdmin">
                     <div align="center">
                         <button (click)="go()" class="btn fa-5x btn-danger">GO</button>
                         <div *ngIf="failEvent" class="fa-2x">
@@ -130,7 +130,7 @@
                     </div>
                 </div>
                 </div>
-                <div *ngIf="person == null">
+                <div *ngIf="isAdmin">
                     ADMIN SESSION
                 </div>
             </div>
