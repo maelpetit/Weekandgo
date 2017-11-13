@@ -29,13 +29,20 @@
                     <br>
                     <div *ngIf = "!hasCurrentPlace">
                         <div class="model-body">
-                            <input [(ngModel)]="searchText" (change)="searchName()" type="text"/>
-                            Enter your place.
                             <div class="fa fa-3x">
                                 We need to have your current place
                             </div>
-                            <br><br>
+                            <input [(ngModel)]="searchText" (change)="searchName()" type="text"/>
+                            Enter your place.
                             <button *ngIf="placeSearch" class="btn btn-primary" (click)="setAndUpdatePlace()">Change current place  to {{placeSearch[0].nom}} </button>
+                            <br><br>
+                            <br>
+                            <ul *ngIf="placeSearch || placeSearch.length > 0">
+                                <li *ngFor="let place of placeSearch" style="font-size: 1em">
+                                    {{ place.nom }}
+                                </li>
+                            </ul>
+
                         </div>
                     </div>
                     <div *ngIf = "hasCurrentPlace">
