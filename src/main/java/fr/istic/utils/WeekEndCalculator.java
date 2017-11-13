@@ -17,6 +17,9 @@ public class WeekEndCalculator {
         if(person == null){
             return null;
         }
+        if(person.getDistanceMax() == null){
+            return null;
+        }
         Set<Event> events = new HashSet<>();
         Map<Pair<Place, Sport>, Double> map = new HashMap<>();
         for(Sport sport : person.getSportLists()){
