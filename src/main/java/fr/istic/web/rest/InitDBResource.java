@@ -3,6 +3,7 @@ package fr.istic.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import fr.istic.domain.Event;
 import fr.istic.domain.Person;
+import fr.istic.log.FileLog;
 import fr.istic.service.PersonService;
 import fr.istic.service.PlaceService;
 import fr.istic.service.SportService;
@@ -37,16 +38,17 @@ public class InitDBResource {
     private PlaceTest placeTest;
 
     /**
-     * GET  /event/:id : get best Event for Person id.
+     * GET  /init-db : Init
      *
      * @return the ResponseEntity with status 200 (OK) and best Event in body
      */
-    @GetMapping("/init")
+    @GetMapping("/init-db")
     @Timed
-    public void initDB() {
+    public ResponseEntity initDB() {
         log.debug("REST request to initialize database");
-        placeTest.placeCollectionTest();
-        sportTest.sportCreationsTest();
-        placeTest.placesInSportsTest();
+//        placeTest.placeCollectionTest();
+//        sportTest.sportCreationsTest();
+//        placeTest.placesInSportsTest();
+        return ResponseEntity.ok().build();
     }
 }

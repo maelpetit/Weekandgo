@@ -16,7 +16,7 @@ export class SettingsComponent implements OnInit {
     accountObj: Account;
     person: Person;
     isAdmin: boolean;
-    languages: any[];
+
     constructor(
         private account: AccountService,
         private personService: PersonService,
@@ -28,8 +28,8 @@ export class SettingsComponent implements OnInit {
         this.principal.identity().then((accountObj) => {
             this.accountObj = accountObj;
             this.isAdmin = true;
-            for(const role of this.accountObj.authorities){
-                if(role === 'ROLE_ADMIN'){
+            for (const role of this.accountObj.authorities) {
+                if (role === 'ROLE_ADMIN') {
                     this.isAdmin = false;
                 }
             }
@@ -37,7 +37,7 @@ export class SettingsComponent implements OnInit {
             this.principal.identity().then((account) => {
                 this.settingsAccount = this.copyAccount(account);
                 console.log(this.settingsAccount);
-                if(this.isAdmin) {
+                if (this.isAdmin) {
                     this.loadPerson();
                 }
             });
@@ -58,7 +58,7 @@ export class SettingsComponent implements OnInit {
                 this.settingsAccount = this.copyAccount(account);
             });
 
-            if(this.isAdmin) {
+            if (this.isAdmin) {
                 this.person.firstName = this.settingsAccount.firstName;
                 this.person.lastName = this.settingsAccount.lastName;
                 this.person.email = this.settingsAccount.email;

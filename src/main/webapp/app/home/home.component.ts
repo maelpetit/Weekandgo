@@ -12,6 +12,7 @@ import {Place} from '../entities/place/place.model';
 import {ResponseWrapper} from '../shared/model/response-wrapper.model';
 import {isNullOrUndefined} from 'util';
 import {EventService} from '../entities/event/event.service';
+import {InitService} from '../admin/init-db/init.service';
 
 @Component({
     selector: 'jhi-home',
@@ -42,7 +43,8 @@ export class HomeComponent implements OnInit {
         private personService: PersonService,
         private sportService: SportService,
         private placeService: PlaceService,
-        private eventService: EventService
+        private eventService: EventService,
+        private initService: InitService
     ) {
         this.sports = [];
         this._eventReceived = false;
@@ -87,7 +89,6 @@ export class HomeComponent implements OnInit {
                 mySport.checked = this.person.containsSport(mySport.sport.id);
                 this.sports.push(mySport);
             }
-            console.log(this.sports);
         });
 
         this.placeService.query().subscribe((res: ResponseWrapper) => {
@@ -169,6 +170,7 @@ export class HomeComponent implements OnInit {
     setCurrentPlace() {
         if (!isNullOrUndefined(this.placeSearch) && this.placeSearch.length > 0) {
             this.person.currentPlace = this.placeSearch[0];
+            this.hasCurrentPlace = true;
         }
     }
     eventReceived() {
@@ -176,6 +178,10 @@ export class HomeComponent implements OnInit {
     }
     previous() {
         this._eventReceived = false ;
+    }
+
+    initDataBase() {
+        this.initService.init();
     }
 }
 

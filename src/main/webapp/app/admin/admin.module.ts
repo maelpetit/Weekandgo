@@ -31,6 +31,7 @@ import {
     UserResolve,
     UserModalService
 } from './';
+import {InitService} from "./init-db/init.service";
 
 @NgModule({
     imports: [
@@ -70,7 +71,8 @@ import {
         JhiTrackerService,
         UserResolvePagingParams,
         UserResolve,
-        UserModalService
+        UserModalService,
+        InitService
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

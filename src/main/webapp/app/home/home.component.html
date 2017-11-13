@@ -22,15 +22,16 @@
                 <div *ngSwitchCase="false" >
                     <div *ngIf = "!hasCurrentPlace" align="center" class="model-body">
                         <div class="fa fa-3x">
-                            We need to have your current place
+                            Please enter your current place.
                         </div>
                         <br><br>
                         <input [(ngModel)]="searchText" (change)="searchName()" type="text"/>
-                        Enter your place.
-                        <button *ngIf="placeSearch" class="btn btn-primary" (click)="setAndUpdatePlace()">Change current place  to {{placeSearch[0].nom}} </button>
+                        Press enter to search
+                        <br><br>
+                        <button *ngIf="placeSearch && placeSearch.length > 0" class="btn btn-primary" (click)="setAndUpdatePlace()">Change current place  to {{placeSearch[0].nom}} </button>
                         <br><br>
                         <br>
-                        <ul *ngIf="placeSearch || placeSearch.length > 0">
+                        <ul *ngIf="placeSearch && placeSearch.length > 0">
                             <li *ngFor="let place of placeSearch" style="font-size: 1em">
                                 {{ place.nom }}
                             </li>
@@ -151,6 +152,8 @@
             </div>
             <div *ngIf="isAdmin">
                 ADMIN SESSION
+                <br><br>
+                <button class="btn btn-primary" (click)="initDataBase()">Initialise Database</button>
             </div>
         </div>
     </div>

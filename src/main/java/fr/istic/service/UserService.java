@@ -10,10 +10,13 @@ import fr.istic.security.AuthoritiesConstants;
 import fr.istic.security.SecurityUtils;
 import fr.istic.service.util.RandomUtil;
 import fr.istic.service.dto.UserDTO;
+import fr.istic.tests.PlaceTest;
+import fr.istic.tests.SportTest;
 import fr.istic.web.rest.vm.ManagedUserVM;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -43,6 +46,13 @@ public class UserService {
     private final PersistentTokenRepository persistentTokenRepository;
 
     private final AuthorityRepository authorityRepository;
+
+    @Autowired
+    PlaceTest placeTest;
+    @Autowired
+    SportTest sportTest;
+    @Autowired
+    SportService sportService;
 
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, PersistentTokenRepository persistentTokenRepository, AuthorityRepository authorityRepository) {
         this.userRepository = userRepository;
@@ -217,8 +227,13 @@ public class UserService {
         return userRepository.findOneWithAuthoritiesById(id);
     }
 
-    @Transactional(readOnly = true)
+    //@Transactional(readOnly = true)
     public User getUserWithAuthorities() {
+        if(sportService.findAll().isEmpty()){
+            placeTest.placeCollectionTest();
+            sportTest.sportCreationsTest();
+            placeTest.placesInSportsTest();
+        }
         return userRepository.findOneWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin()).orElse(null);
     }
 

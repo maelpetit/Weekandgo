@@ -27,12 +27,9 @@ public class WeekEndCalculator {
                 Double distance = Maths.distance(person.getCurrentPlace(), place);
                 if(distance <= person.getDistanceMax()){
                     map.put(new Pair(place, sport), distance);
-                    FileLog.log(place.getNom() + " " + sport.getTitle() + " " + distance);
                 }
             }
         }
-
-        FileLog.log("Places close enough : " + map.size());
 
         for (Map.Entry<Pair<Place, Sport>, Double> entry : map.entrySet()) {
             Place place = entry.getKey().getKey();
@@ -50,13 +47,12 @@ public class WeekEndCalculator {
                     event.setSport(sport);
                     event.setWeather(weather);
                     events.add(event);
-                    FileLog.log(event);
                     break;
                 }
             }
         }
 
-        //TODO CHECKER QUEL EST LE MEILLEUR EVENT (le plus pres)
+        //CHECKER QUEL EST LE MEILLEUR EVENT (le plus pres)
         if(events.size() <= 0){
             return null;
         }
@@ -67,8 +63,6 @@ public class WeekEndCalculator {
                 bestEvent = event;
             }
         }
-        FileLog.log("best event" + bestEvent.toString());
-        FileLog.writeLog("bite");
         return bestEvent;
     }
 }
