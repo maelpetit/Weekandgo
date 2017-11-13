@@ -354,8 +354,6 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
-                    <fork>true</fork>
-                    <executable>/usr/lib/jvm/jdk1.8.0_144/bin/javac</executable>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.mapstruct</groupId>

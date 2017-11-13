@@ -75,7 +75,6 @@ export class HomeComponent implements OnInit {
             }else {
                 this.hasCurrentPlace = true;
             }
-            console.log(this.person);
             this.loadSportsAndPlaces();
         });
     }
