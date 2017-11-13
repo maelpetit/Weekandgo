@@ -18,8 +18,8 @@
 
     <div *ngSwitchCase="true" >
         <div [ngSwitch]="eventReceived()">
-            <div *ngSwitchCase="false" >
-                    <div *ngIf="!isAdmin">
+            <div *ngIf="!isAdmin">
+                <div *ngSwitchCase="false" >
                     <div align="center">
                         <button (click)="go()" class="btn fa-5x btn-danger">GO</button>
                         <div *ngIf="failEvent" class="fa-2x">
@@ -74,7 +74,7 @@
                                         <input [(ngModel)]="searchText" (change)="searchName()" type="text"/>
                                         Press enter to search
                                         <br><br>
-                                        <button *ngIf="placeSearch" class="btn btn-primary" (click)="setAndUpdatePlace()">Change current place  to {{placeSearch[0].nom}} </button>
+                                        <button *ngIf="placeSearch && placeSearch.length > 0" class="btn btn-primary" (click)="setAndUpdatePlace()">Change current place  to {{placeSearch[0].nom}} </button>
                                     </div>
                                 </td>
                             </tr>
@@ -83,7 +83,7 @@
                                 </td>
                                 <td>
                                     <br>
-                                    <ul *ngIf="placeSearch || placeSearch.length > 0">
+                                    <ul *ngIf="placeSearch && placeSearch.length > 0">
                                         <li *ngFor="let place of placeSearch" style="font-size: 1em">
                                             {{ place.nom }}
                                         </li>
@@ -143,12 +143,12 @@
                         </div>
                     </div>
                 </div>
-                </div>
-                <div *ngIf="isAdmin">
-                    ADMIN SESSION
-                </div>
+            </div>
+            <div *ngIf="isAdmin">
+                ADMIN SESSION
             </div>
         </div>
     </div>
+</div>
 </div>
 </div>

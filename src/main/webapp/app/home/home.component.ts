@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
 
-import { Account, LoginModalService, Principal } from '../shared';
+import {Account, LoginModalService, Principal } from '../shared';
 import {Person} from '../entities/person/person.model';
 import {PersonService} from '../entities/person/person.service';
 import {Sport} from '../entities/sport/sport.model';
@@ -157,13 +157,11 @@ export class HomeComponent implements OnInit {
     }
     searchName() {
         this.placeSearch = new Array<Place>() ;
-        console.log(this.places);
         for (const item of this.places) {
-            if (item.nom.toLowerCase().includes(this.searchText.toLowerCase())) {
+            if (this.searchText !== '' && item.nom.toLowerCase().includes(this.searchText.toLowerCase())) {
                 this.placeSearch.push(item) ;
             }
         }
-        console.log(this.placeSearch) ;
     }
     setAndUpdatePlace() {
         this.setCurrentPlace();

@@ -76,6 +76,8 @@ public class AccountResource {
         userRepository.findOneByEmailIgnoreCase(managedUserVM.getEmail()).ifPresent(u -> {throw new EmailAlreadyUsedException();});
         User user = userService.registerUser(managedUserVM);
 
+        //user.setActivated(true);
+
         Person person = new Person();
         person.setEmail(user.getEmail());
         person.setFirstName(user.getFirstName());

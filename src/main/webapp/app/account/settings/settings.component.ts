@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Principal, AccountService } from '../../shared';
+import { Account, Principal, AccountService } from '../../shared';
 import {PersonService} from '../../entities/person/person.service';
 import {Person} from '../../entities/person/person.model';
 import {isNullOrUndefined} from 'util';
@@ -13,8 +13,9 @@ export class SettingsComponent implements OnInit {
     error: string;
     success: string;
     settingsAccount: any;
+    accountObj: Account;
     person: Person;
-    birthDate: any;
+    isAdmin: boolean;
     languages: any[];
     constructor(
         private account: AccountService,
@@ -23,27 +24,31 @@ export class SettingsComponent implements OnInit {
     ) {
     }
     ngOnInit() {
-        this.principal.identity().then((account) => {
-            this.settingsAccount = this.copyAccount(account);
-            this.loadPerson();
+
+        this.principal.identity().then((accountObj) => {
+            this.accountObj = accountObj;
+            this.isAdmin = true;
+            for(const role of this.accountObj.authorities){
+                if(role === 'ROLE_ADMIN'){
+                    this.isAdmin = false;
+                }
+            }
+            console.log(this.isAdmin);
+            this.principal.identity().then((account) => {
+                this.settingsAccount = this.copyAccount(account);
+                console.log(this.settingsAccount);
+                if(this.isAdmin) {
+                    this.loadPerson();
+                }
+            });
         });
+
     }
     loadPerson() {
         this.personService.findByLogin(this.settingsAccount.login).subscribe((person) => {
             this.person = person;
-            if (!isNullOrUndefined(this.person.birthDate)) {
-                const date = new Date(Date.parse(this.person.birthDate));
-                this.birthDate = date.getFullYear() + '-' +
-                    this.correctDateString(date.getMonth() + 1) + '-' +
-                    this.correctDateString(date.getDate()) + 'T' +
-                    this.correctDateString(date.getHours()) + ':' +
-                    this.correctDateString(date.getMinutes());
-            }
             console.log(this.person);
         });
-    }
-    correctDateString(date: number) {
-        return date < 10 ? '0' + date : date;
     }
     save() {
         this.account.save(this.settingsAccount).subscribe(() => {
@@ -53,19 +58,20 @@ export class SettingsComponent implements OnInit {
                 this.settingsAccount = this.copyAccount(account);
             });
 
-            this.person.firstName = this.settingsAccount.firstName;
-            this.person.lastName = this.settingsAccount.lastName;
-            this.person.email = this.settingsAccount.email;
-            this.person.birthDate = this.birthDate;
-            if (!this.person.profileCompleted) {
-                if (!isNullOrUndefined(this.person.phoneNumber) && !isNullOrUndefined(this.person.birthDate)) {
-                    this.person.profileCompleted = true;
+            if(this.isAdmin) {
+                this.person.firstName = this.settingsAccount.firstName;
+                this.person.lastName = this.settingsAccount.lastName;
+                this.person.email = this.settingsAccount.email;
+                if (!this.person.profileCompleted) {
+                    if (!isNullOrUndefined(this.person.phoneNumber) && !isNullOrUndefined(this.person.birthDate)) {
+                        this.person.profileCompleted = true;
+                    }
                 }
+                this.personService.update(this.person).subscribe((person) => {
+                    this.person = person;
+                    console.log(this.person);
+                });
             }
-            this.personService.update(this.person).subscribe((person) => {
-                this.person = person;
-                console.log(this.person);
-            });
 
         }, () => {
             this.success = null;
