@@ -3,6 +3,7 @@ package fr.istic.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import fr.istic.domain.Event;
 import fr.istic.domain.Person;
+import fr.istic.service.MailService;
 import fr.istic.service.PersonService;
 import fr.istic.utils.WeekEndCalculator;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -29,6 +30,9 @@ public class EventResource {
     @Autowired
     private PersonService personService;
 
+    @Autowired
+    private MailService mailService;
+
     /**
      * GET  /event/:id : get best Event for Person id.
      *
@@ -38,7 +42,17 @@ public class EventResource {
     @Timed
     public ResponseEntity<Event> getBestEventWithPersonId(@PathVariable Long id) {
         log.debug("REST request to get best Event for Person : {}", id);
-        Event event = WeekEndCalculator.getEventForPerson(personService.findOne(id));
+        Person person = personService.findOne(id);
+        Event event = WeekEndCalculator.getEventForPerson(person);
+        if(event != null){
+            mailService.sendEmail(person.getUser().getEmail(), "Your Event From Weekandgo " + event.getDate(),createContent(event),false,true);
+        }
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(event));
+    }
+
+    private String createContent(Event event){
+        String content = "Bonjour, WeekandGo te propose de faire du " + event.getSport().getTitle() + " à " + event.getPlace().getNom() +
+            " qui se situe à : " + Math.round(event.getDistance()) + "Km. Il fera " + event.getWeather().getTemperature() + "°C ";
+        return content;
     }
 }
