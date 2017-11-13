@@ -33,6 +33,7 @@ export class HomeComponent implements OnInit {
     failEvent: boolean;
     event: any;
     isAdmin: boolean;
+    hasCurrentPlace: boolean;
 
     constructor(
         private principal: Principal,
@@ -46,6 +47,7 @@ export class HomeComponent implements OnInit {
         this.sports = [];
         this._eventReceived = false;
         this.failEvent = false;
+        this.hasCurrentPlace = false;
     }
     ngOnInit() {
         this.loadAccount();
@@ -68,6 +70,11 @@ export class HomeComponent implements OnInit {
         }
         this.personService.findByLogin(this.account.login).subscribe((person) => {
             this.person = person;
+            if (isNullOrUndefined(this.person.currentPlace)) {
+                this.hasCurrentPlace = false;
+            }else {
+                this.hasCurrentPlace = true;
+            }
             console.log(this.person);
             this.loadSportsAndPlaces();
         });
@@ -150,6 +157,7 @@ export class HomeComponent implements OnInit {
     }
     searchName() {
         this.placeSearch = new Array<Place>() ;
+        console.log(this.places);
         for (const item of this.places) {
             if (item.nom.toLowerCase().includes(this.searchText.toLowerCase())) {
                 this.placeSearch.push(item) ;
