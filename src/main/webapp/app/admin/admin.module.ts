@@ -31,7 +31,7 @@ import {
     UserResolve,
     UserModalService
 } from './';
-import {InitService} from "./init-db/init.service";
+import {InitService} from './init-db/init.service';
 
 @NgModule({
     imports: [
