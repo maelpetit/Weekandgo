@@ -20,33 +20,30 @@
         <div [ngSwitch]="eventReceived()">
             <div *ngIf="!isAdmin">
                 <div *ngSwitchCase="false" >
-                    <div align="center">
-                        <button (click)="go()" class="btn fa-5x btn-danger">GO</button>
-                        <div *ngIf="failEvent" class="fa-2x">
-                            No Event was found sorry.
+                    <div *ngIf = "!hasCurrentPlace" align="center" class="model-body">
+                        <div class="fa fa-3x">
+                            We need to have your current place
                         </div>
-                    </div>
-                    <br>
-                    <div *ngIf = "!hasCurrentPlace">
-                        <div class="model-body">
-                            <div class="fa fa-3x">
-                                We need to have your current place
-                            </div>
-                            <br><br>
-                            <input [(ngModel)]="searchText" (change)="searchName()" type="text"/>
-                            Enter your place.
-                            <button *ngIf="placeSearch" class="btn btn-primary" (click)="setAndUpdatePlace()">Change current place  to {{placeSearch[0].nom}} </button>
-                            <br><br>
-                            <br>
-                            <ul *ngIf="placeSearch || placeSearch.length > 0">
-                                <li *ngFor="let place of placeSearch" style="font-size: 1em">
-                                    {{ place.nom }}
-                                </li>
-                            </ul>
-
-                        </div>
+                        <br><br>
+                        <input [(ngModel)]="searchText" (change)="searchName()" type="text"/>
+                        Enter your place.
+                        <button *ngIf="placeSearch" class="btn btn-primary" (click)="setAndUpdatePlace()">Change current place  to {{placeSearch[0].nom}} </button>
+                        <br><br>
+                        <br>
+                        <ul *ngIf="placeSearch || placeSearch.length > 0">
+                            <li *ngFor="let place of placeSearch" style="font-size: 1em">
+                                {{ place.nom }}
+                            </li>
+                        </ul>
                     </div>
                     <div *ngIf = "hasCurrentPlace">
+                        <div align="center">
+                            <button (click)="go()" class="btn fa-5x btn-danger">GO</button>
+                            <div *ngIf="failEvent" class="fa-2x">
+                                No Event was found sorry.
+                            </div>
+                        </div>
+                        <br>
                         <table  border="0" width="100%">
                             <th class="fa-2x ">Sports </th>
                             <th class="fa-2x">Current Place : {{person.currentPlace.nom}} </th>
